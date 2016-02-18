@@ -1,4 +1,4 @@
-package com.team10.modelo;
+package com.okas.packModelo;
 
 public class Puntuacion {
 
