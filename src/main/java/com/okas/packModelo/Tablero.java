@@ -2,10 +2,6 @@ package com.okas.packModelo;
 
 import java.util.ArrayList;
 
-/**
- * Created by toburi on 26/02/2016.
- * Creado por toburi el 26/02/2016.
- */
 public class Tablero {
     private ArrayList<Casilla> campoJuego;
     private int alto;
@@ -21,7 +17,7 @@ public class Tablero {
     private void crearTablero(){
 
     }
-
+    
     public void descubrirCasilla(Casilla cas){
 //        if (!cas.descubierta){
 //            if (!cas.marcadaBandera){
