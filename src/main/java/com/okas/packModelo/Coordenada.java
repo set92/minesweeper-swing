@@ -3,20 +3,18 @@ package com.okas.packModelo;
 public class Coordenada {
     int posAlto;
     int posAncho;
+    
+    Coordenada(int pAlto, int pAncho){
+    	this.posAlto = pAlto;
+    	this.posAncho = pAncho;
+    }
 
     public int getPosAlto() {
         return posAlto;
-    }
-
-    public void setPosAlto(int posAlto) {
-        this.posAlto = posAlto;
     }
 
     public int getPosAncho() {
         return posAncho;
     }
 
-    public void setPosAncho(int posAncho) {
-        this.posAncho = posAncho;
-    }
 }

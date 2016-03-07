@@ -1,30 +1,15 @@
 package com.okas.packModelo;
 
-public class CasillaValor implements Casilla {
+public class CasillaValor extends Casilla {
     private int valor;
-    private ListaVecinos listaVecinos;
 
-    public CasillaValor() {
-        
+
+    public CasillaValor(Coordenada pPos) {
+    	super(pPos);
+    	this.valor = 0;
     }
 
+    private void incrementarValor(){ this.valor++;}
 
-    @Override
-    public void descubrirCasilla() {
-
-    }
-
-    @Override
-    public void marcarBandera() {
-
-    }
-
-    private void incrementarValor(){
-      
-    }
-
-    private void descubrirVecinos(){
-      
-    }
 
 }

@@ -1,14 +1,15 @@
 package com.okas.packModelo;
 
-public class CasillaMina implements Casilla {
+public class CasillaMina extends Casilla {
     
+	public CasillaMina(Coordenada pPos){
+		super(pPos);
+	}
+	
     @Override
     public void descubrirCasilla() {
-
-    }
-
-    @Override
-    public void marcarBandera() {
+    	marcarDescubierta();
+    	System.out.println("se ha acabado el juego");
 
     }
 }

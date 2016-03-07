@@ -1,11 +1,21 @@
 package com.okas.packModelo;
 
-public interface Casilla {
-    Coordenada pos = null;
-    boolean marcadaBandera = false;
-    boolean descubierta = false;
+public abstract class Casilla {
+    protected Coordenada pos;
+    protected boolean marcadaBandera;
+    protected boolean descubierta;
 
-    public void descubrirCasilla();
+    public Casilla(Coordenada pCord){
+    	this.pos = pCord;
+    	this.descubierta = false;
+    	this.marcadaBandera = false;
+    }
+    
+    public void descubrirCasilla(){
+    	marcarDescubierta();
+    }
 
-    public void marcarBandera();
+    public void marcarBandera(){this.marcadaBandera = true;}
+    
+    public void marcarDescubierta(){this.descubierta = true;}
 }

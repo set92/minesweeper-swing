@@ -8,42 +8,22 @@ public class Tablero {
     private int ancho;
     private int numMinas;
     
-    public Tablero(ArrayList<Casilla> campoJuego, int alto, int ancho) {
-        this.campoJuego = campoJuego;
-        this.alto = alto;
-        this.ancho = ancho;
+    public Tablero(int pAlto, int pAncho, int pNumMinas) {
+        this.campoJuego = new ArrayList<Casilla>();
+        this.alto = pAlto;
+        this.ancho = pAncho;
+        this.numMinas = pNumMinas;
     }
 
-    private void crearTablero(){
-
-    }
+    private void crearTablero(){}
     
     public void descubrirCasilla(Casilla cas){
-//        if (!cas.descubierta){
-//            if (!cas.marcadaBandera){
-//                if (cas.tieneMina){
-//                    //GAMEOVER
-//                }else{
-//                    cas.descubrirCasilla();
-//                }
-//            }
-//        }
-
+    	cas.descubrirCasilla();
     }
 
-    private void ponerMinas(){
-      
-    }
+    private void ponerMinas(){}
     
-    private void incrementarAlrededores(Coordenada coordenadaAct){
-      
-    }
+    private void incrementarAlrededores(Coordenada coordenadaAct){}
 
-    private ListaVecinos cogerVecinos(Casilla casilla){
-      return null;
-    }
-    
-    private void descubrirVecinos(ListaVecinos lista){
-        
-    }
+    private ListaVecinos cogerVecinos(Casilla casilla){return null;}
 }
