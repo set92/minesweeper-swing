@@ -12,7 +12,7 @@ public abstract class Casilla {
     }
     
     public void descubrirCasilla(){
-    	marcarDescubierta();
+    	if (!descubierta) marcarDescubierta();
     }
 
     public void marcarBandera(){this.marcadaBandera = true;}

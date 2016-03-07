@@ -7,8 +7,17 @@ public class CasillaValorCero extends Casilla {
 	public CasillaValorCero(Coordenada pCord) {
 		super(pCord);
 	}
+	
+	@Override
+	public void descubrirCasilla(){
+		if (!descubierta){
+			marcarDescubierta();
+			descubrirVecinos();
+		}
+	}
 
 	private void descubrirVecinos() {
+		lista.expandirVecinos();
 		
 	}
 
