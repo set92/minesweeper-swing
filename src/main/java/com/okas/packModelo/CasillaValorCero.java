@@ -2,7 +2,7 @@ package com.okas.packModelo;
 
 public class CasillaValorCero extends Casilla {
 
-	private ListaVecinos lista;
+	private ListaCasillas lista;
 
 	public CasillaValorCero(Coordenada pCord) {
 		super(pCord);

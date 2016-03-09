@@ -6,10 +6,15 @@ public class CasillaValor extends Casilla {
 
     public CasillaValor(Coordenada pPos) {
     	super(pPos);
-    	this.valor = 0;
+    	this.valor = 1;
     }
 
-    private void incrementarValor(){ this.valor++;}
+    public void incrementarValor(){ this.valor++;}
+
+	public int getValor() {
+		return this.valor;
+	}
+	
 
 
 }

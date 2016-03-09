@@ -9,11 +9,11 @@ public class Coordenada {
     	this.posAncho = pAncho;
     }
 
-    public int getPosAlto() {
+    public int getAlto() {
         return posAlto;
     }
 
-    public int getPosAncho() {
+    public int getAncho() {
         return posAncho;
     }
 

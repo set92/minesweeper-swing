@@ -2,10 +2,10 @@ package com.okas.packModelo;
 
 import java.util.ArrayList;
 
-public class ListaVecinos {
+public class ListaCasillas {
     private ArrayList<Casilla> listaVecinos;
     
-    public ListaVecinos(){
+    public ListaCasillas(){
     	this.listaVecinos = new ArrayList<Casilla>();
     }
 
