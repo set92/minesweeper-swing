@@ -3,7 +3,7 @@ package com.okas.packModelo;
 import java.util.ArrayList;
 
 public class Buscaminas {
-    private Tablero tablero;
+    private TableroBuilder tablero;
     private int puntuacion;
     private int tiempo;
     private static Buscaminas miBuscaminas;
@@ -33,5 +33,7 @@ public class Buscaminas {
     	return miBuscaminas;
     }
 
-    private void generarTablero(){}
+    private void generarTablero(){
+    	
+    }
 }
