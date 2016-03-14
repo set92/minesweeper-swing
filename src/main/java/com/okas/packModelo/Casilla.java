@@ -15,7 +15,11 @@ public abstract class Casilla {
     	if (!descubierta) marcarDescubierta();
     }
 
+    public Coordenada getCoordenada(){return this.pos;}
+    
     public void marcarBandera(){this.marcadaBandera = true;}
+    
+    public void quitarBandera(){this.marcadaBandera = false;}
     
     public void marcarDescubierta(){this.descubierta = true;}
 }

@@ -3,25 +3,21 @@ package com.okas.packModelo;
 public class BuilderN2 extends TableroBuilder {
 
 	public BuilderN2() {
-		// TODO Auto-generated constructor stub
+		tablero = new Tablero(10,15,30);
 	}
 
 	@Override
 	public void ponerCasillasBomba() {
-		// TODO Auto-generated method stub
-
+		tablero.ponerCasillasBomba();
+		
 	}
-
-	@Override
-	public void ponerCasillasValor() {
-		// TODO Auto-generated method stub
-
-	}
-
+	
 	@Override
 	public void ponerCasillasRestantes() {
-		// TODO Auto-generated method stub
-
+		tablero.rellenarCasillasRestantes();
+		
 	}
+
+	
 
 }

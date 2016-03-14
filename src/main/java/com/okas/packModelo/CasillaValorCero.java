@@ -15,6 +15,13 @@ public class CasillaValorCero extends Casilla {
 			descubrirVecinos();
 		}
 	}
+	
+	
+	public ListaCasillas getLista(){return this.lista;}
+	
+	public void setLista(ListaCasillas pLista){
+		lista = pLista;
+	}
 
 	private void descubrirVecinos() {
 		lista.expandirVecinos();

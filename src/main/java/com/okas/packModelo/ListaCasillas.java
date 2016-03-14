@@ -3,18 +3,18 @@ package com.okas.packModelo;
 import java.util.ArrayList;
 
 public class ListaCasillas {
-    private ArrayList<Casilla> listaVecinos;
+    private ArrayList<Casilla> listaCasilla;
     
     public ListaCasillas(){
-    	this.listaVecinos = new ArrayList<Casilla>();
+    	this.listaCasilla = new ArrayList<Casilla>();
     }
 
-    public ArrayList<Casilla> getListVecinos() {
-        return listaVecinos;
+    public ArrayList<Casilla> getListCasilla() {
+        return listaCasilla;
     }
 
     public void expandirVecinos(){
-        for (Casilla cas : listaVecinos) {
+        for (Casilla cas : listaCasilla) {
             cas.descubrirCasilla();
         }
     }

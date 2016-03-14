@@ -8,6 +8,7 @@ public class CasillaMina extends Casilla {
 	
     @Override
     public void descubrirCasilla() {
+    	System.out.println("casillaBomba");
     	marcarDescubierta();
     	System.out.println("se ha acabado el juego");
 
