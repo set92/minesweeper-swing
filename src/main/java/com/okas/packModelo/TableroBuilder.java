@@ -1,9 +1,9 @@
 package com.okas.packModelo;
 
 public abstract class TableroBuilder {
-	
+
 	protected Tablero tablero;
-	
+
 	public Tablero getTablero(){return this.tablero;}
 	
 	public void construirTablero(){
