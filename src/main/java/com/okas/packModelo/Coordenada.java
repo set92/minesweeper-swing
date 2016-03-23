@@ -1,10 +1,10 @@
-package com.okas.packModelo;
+package packModelo;
 
 public class Coordenada {
-    int posAlto;
-    int posAncho;
+    private int posAlto;
+    private int posAncho;
     
-    Coordenada(int pAlto, int pAncho){
+    public Coordenada(int pAlto, int pAncho){
     	this.posAlto = pAlto;
     	this.posAncho = pAncho;
     }

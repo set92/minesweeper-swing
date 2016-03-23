@@ -1,4 +1,4 @@
-package com.okas.packModelo;
+package packModelo;
 
 public class Main {
 

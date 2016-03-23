@@ -1,4 +1,4 @@
-package com.okas.packModelo;
+package packModelo;
 
 public abstract class Casilla {
     protected Coordenada pos;

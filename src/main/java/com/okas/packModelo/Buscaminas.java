@@ -1,36 +1,38 @@
-package com.okas.packModelo;
+package packModelo;
 
 
 public class Buscaminas {
-    private TableroBuilder tablero;
+    private TableroBuilder tableroBuilder;
+    private Tablero tablero;
    // private int puntuacion;
    // private int tiempo;
-    private static Buscaminas miBuscaminas;
+    private static Buscaminas miBuscaminas = null;
 
-
-    private Buscaminas() {
-    	//TODO completar constructora
-    }
-    
-    
-    public void setTableroBuilder(TableroBuilder tb){
-    	tablero = tb;
-    }
-    
-    public Tablero getTablero(){
-    	construirTablero();
-    	return tablero.getTablero();
-    }
-    
-    private void construirTablero(){
-    	tablero.construirTablero();
-    }
-   
-    public static Buscaminas getBuscaminas(){
-    	if (miBuscaminas == null) miBuscaminas = new Buscaminas();
+    public static Buscaminas getBuscaminas(int pNivel){
+    	if (miBuscaminas == null){
+    		miBuscaminas = new Buscaminas(pNivel);
+    	}
     	return miBuscaminas;
     }
     
+    private Buscaminas(int pNivel) {
+    	if (pNivel == 1){
+    		tableroBuilder = new BuilderN1();
+    	}
+    	else if (pNivel == 2){
+    		tableroBuilder = new BuilderN2();
+    	}
+    	else if (pNivel == 3){
+    		tableroBuilder = new BuilderN3();
+    	}
+    	construirTablero();
+    }
+    
+    private void construirTablero(){
+    	tablero = tableroBuilder.construirTablero();
+    }
+   
+  
     /*
     //ESTO NO ES PARTE DEL CÓDIGO A IMPLEMENTAR, ES SIMPLEMENTE UN EJEMPLO QUE NOS SIRVE A SERGIO Y A MI.
     public static void main(String args[]){

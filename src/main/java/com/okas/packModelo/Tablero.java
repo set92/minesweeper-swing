@@ -1,4 +1,4 @@
-package com.okas.packModelo;
+package packModelo;
 
 import java.util.Random;
 
@@ -14,10 +14,9 @@ public class Tablero {
 		numMinas = 7;
 	}
 
-	public Tablero(int pAlto, int pAncho, int pNumMinas) {
+	public Tablero(int pAlto, int pAncho) {
 		alto = pAlto;
 		ancho = pAncho;
-		numMinas = pNumMinas;
 		campoJuego = new Casilla[pAlto][pAncho];
 	}
 
@@ -30,8 +29,8 @@ public class Tablero {
 	}
 
 	public void colocarCasilla(Coordenada pCoord, Casilla pCasilla) {
-		int i = pCoord.posAlto;
-		int j = pCoord.posAncho;
+		int i = pCoord.getAlto();
+		int j = pCoord.getAncho();
 		campoJuego[i][j] = pCasilla;
 	}
 
@@ -86,7 +85,8 @@ public class Tablero {
 		this.imprimirCampo();
 	}
 
-	public void ponerCasillasBomba() {
+	public void ponerCasillasBomba(int pMinas) {
+		numMinas=pMinas; 
 		int contador = numMinas;
 		Random rn = new Random();
 		int x;

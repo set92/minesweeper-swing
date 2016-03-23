@@ -1,23 +1,13 @@
-package com.okas.packModelo;
+package packModelo;
 
 public class BuilderN2 extends TableroBuilder {
 
-	public BuilderN2() {
-		tablero = new Tablero(5,5,5); //TODO cambiar parámetros de la constructora
+	public void generarTablero(){
+		tablero = new Tablero(5,10); //TODO cambiar parámetros de la constructora
 	}
-
-	@Override
 	public void ponerCasillasBomba() {
-		tablero.ponerCasillasBomba();
-		
-	}
-	
-	@Override
-	public void ponerCasillasRestantes() {
-		tablero.rellenarCasillasRestantes();
-		
-	}
+		tablero.ponerCasillasBomba(20);
+	}	
 
-	
 
 }
