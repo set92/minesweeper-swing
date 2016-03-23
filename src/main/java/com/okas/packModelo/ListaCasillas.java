@@ -2,7 +2,7 @@ package packModelo;
 
 import java.util.ArrayList;
 
-public class ListaCasillas {
+public class ListaCasillas extends ArrayList<Casilla>{
     private ArrayList<Casilla> listaCasilla;
     
     public ListaCasillas(){

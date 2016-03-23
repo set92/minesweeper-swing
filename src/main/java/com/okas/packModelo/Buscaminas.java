@@ -2,6 +2,7 @@ package packModelo;
 
 
 public class Buscaminas {
+<<<<<<< HEAD
     private TableroBuilder tableroBuilder;
     private Tablero tablero;
    // private int puntuacion;
@@ -26,12 +27,37 @@ public class Buscaminas {
     		tableroBuilder = new BuilderN3();
     	}
     	construirTablero();
+=======
+    private TableroBuilder tablero;
+    // private int puntuacion;
+    // private int tiempo;
+    private static Buscaminas miBuscaminas;
+    private static boolean primeraVez = true;
+
+    private Buscaminas() {}
+
+    public int getAlto(){ return getTablero().getAlto(); }
+    public int getAncho(){ return getTablero().getAncho(); }
+    public int getNumMinas(){ return getTablero().getNumMinas(); }
+
+    public void setTableroBuilder(TableroBuilder tb){
+    	tablero = tb;
+    }
+    
+    public Tablero getTablero(){
+        if (primeraVez) {
+            construirTablero();
+            primeraVez = false;
+        }
+    	return tablero.getTablero();
+>>>>>>> 626fef66833eecdfd5483d52af031eaa71bd1fc1
     }
     
     private void construirTablero(){
     	tablero = tableroBuilder.construirTablero();
     }
    
+<<<<<<< HEAD
   
     /*
     //ESTO NO ES PARTE DEL CÓDIGO A IMPLEMENTAR, ES SIMPLEMENTE UN EJEMPLO QUE NOS SIRVE A SERGIO Y A MI.
@@ -48,4 +74,11 @@ public class Buscaminas {
    
     
    
+=======
+    public static Buscaminas getBuscaminas(){
+    	if (miBuscaminas == null) miBuscaminas = new Buscaminas();
+    	return miBuscaminas;
+    }
+
+>>>>>>> 626fef66833eecdfd5483d52af031eaa71bd1fc1
 }

@@ -1,12 +1,15 @@
 package packModelo;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Tablero {
-	public int alto;
-	public int ancho;
-	public int numMinas;
+
+	private int alto;
+	private int ancho;
+	private int numMinas;
 	private Casilla[][] campoJuego;
+    private static boolean minasPuestas = false;//Flag para ver si estan puestas las minas
 
 	public Tablero() {
 		alto = 10;
@@ -18,9 +21,22 @@ public class Tablero {
 		alto = pAlto;
 		ancho = pAncho;
 		campoJuego = new Casilla[pAlto][pAncho];
+
 	}
 
-	public void setCampoJuego(Casilla[][] pCampo) {
+    public int getAlto() {
+        return alto;
+    }
+
+    public int getAncho() {
+        return ancho;
+    }
+
+    public int getNumMinas() {
+        return numMinas;
+    }
+
+    public void setCampoJuego(Casilla[][] pCampo) {
 		campoJuego = pCampo;
 	}
 
@@ -49,7 +65,6 @@ public class Tablero {
 					((CasillaValorCero) cas).setLista(lista);
 				}
 			}
-
 		}
 	}
 
@@ -69,7 +84,6 @@ public class Tablero {
 	}
 
 	public void rellenarCasillasRestantes() {
-
 		for (int i = 0; i < alto; i++) {
 			for (int j = 0; j < ancho; j++) {
 				if (j >= 0 && j < ancho && i >= 0 && i < alto) {
@@ -91,20 +105,23 @@ public class Tablero {
 		Random rn = new Random();
 		int x;
 		int numeroAleatorio, numeroAleatorio2;
-		while (contador != 0) {
-			x = rn.ints(0, alto).findFirst().getAsInt();
-			numeroAleatorio = x;
-			x = rn.ints(0, ancho).findFirst().getAsInt();
-			numeroAleatorio2 = x;
-			Casilla unaCasilla = campoJuego[numeroAleatorio][numeroAleatorio2];
-			if (!(unaCasilla instanceof CasillaMina)) {
-				Coordenada nuevaPos = new Coordenada(numeroAleatorio, numeroAleatorio2);
-				CasillaMina nuevaMina = new CasillaMina(nuevaPos);
-				campoJuego[numeroAleatorio][numeroAleatorio2] = nuevaMina;
-				incrementarAlrededores(nuevaMina.pos);
-				contador--;
-			}
-		}
+        if (!minasPuestas){
+            while (contador != 0) {
+                x = rn.ints(0, alto).findFirst().getAsInt();
+                numeroAleatorio = x;
+                x = rn.ints(0, ancho).findFirst().getAsInt();
+                numeroAleatorio2 = x;
+                Casilla unaCasilla = campoJuego[numeroAleatorio][numeroAleatorio2];
+                if (!(unaCasilla instanceof CasillaMina)) {
+                    Coordenada nuevaPos = new Coordenada(numeroAleatorio, numeroAleatorio2);
+                    CasillaMina nuevaMina = new CasillaMina(nuevaPos);
+                    campoJuego[numeroAleatorio][numeroAleatorio2] = nuevaMina;
+                    incrementarAlrededores(nuevaMina.pos);
+                    contador--;
+                }
+            }
+            minasPuestas = true;
+        }
 	}
 
 	private void incrementarAlrededores(Coordenada coordenadaAct) {
@@ -159,5 +176,55 @@ public class Tablero {
 		}
 		System.out.println(res);
 	}
+//TODO CODIGO NUEVO
+    public ArrayList<Casilla> mostrarCasillaValorCero(int pFil, int pCol){
+        ArrayList<Casilla>[] listas;
+        ArrayList<Casilla> aDevolver = new ArrayList<Casilla>();
+        ArrayList<Casilla> aux = new ArrayList<Casilla>();
+        int index = 0;
+        Casilla cas = campoJuego[pFil][pCol];
+        int fila, columna;
+        aux.add(cas);
+        while(recorrer(aux,index)){
+            cas = aux.get(index);
+            fila = cas.getCoordenada().getAlto();
+            columna = cas.getCoordenada().getAncho();
+            campoJuego[fila][columna].marcarDescubierta();
+            aDevolver.add(cas);
+            listas = checkCasValorCero(aDevolver, aux, fila+1, columna+1);
+            listas = checkCasValorCero(aDevolver, aux, fila+1, columna);
+            listas = checkCasValorCero(aDevolver, aux, fila+1, columna-1);
+            listas = checkCasValorCero(aDevolver, aux, fila, columna+1);
+            listas = checkCasValorCero(aDevolver, aux, fila, columna-1);
+            listas = checkCasValorCero(aDevolver, aux, fila-1, columna+1);
+            listas = checkCasValorCero(aDevolver, aux, fila-1, columna);
+            listas = checkCasValorCero(aDevolver, aux, fila-1, columna-1);
+            aux = listas[0];
+            aDevolver = listas[1];
+            index++;
+        }
+        return aDevolver;
+    }
+    private boolean recorrer(ArrayList<Casilla> pMirar,int pIndex){
+        boolean flag = false;
+        try{
+            pMirar.get(pIndex);
+            flag=true;
+        }catch(Exception e){}
+        return flag;
+    }
 
+    private ArrayList<Casilla>[] checkCasValorCero(ArrayList<Casilla> pDevol, ArrayList<Casilla> pMirar, int pFila, int pCol){
+        ArrayList<Casilla>[] listas = new ArrayList[2];
+        try{
+            if(campoJuego[pFila][pCol]instanceof CasillaValorCero && !campoJuego[pFila][pCol].isDescubierta())
+                pMirar.add(campoJuego[pFila][pCol]);
+            else if(campoJuego[pFila][pCol]instanceof CasillaValor && !campoJuego[pFila][pCol].isDescubierta())
+                pDevol.add(campoJuego[pFila][pCol]);
+        }catch(Exception e){}
+        listas[0] = pMirar;
+        listas[1] = pDevol;
+        return listas;
+    }
+//TODO FIN CODIGO NUEVO
 }
