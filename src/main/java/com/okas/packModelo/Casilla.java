@@ -19,7 +19,7 @@ public abstract class Casilla {
     
     public void marcarBandera(){this.marcadaBandera = true;}
     
-    public void quitarBandera(){this.marcadaBandera = false;}
+    public void desmarcarVacia(){this.marcadaBandera = false;}
     
     public void marcarDescubierta(){this.descubierta = true;}
 }

@@ -8,6 +8,12 @@ public class Tablero {
 	public int numMinas;
 	private Casilla[][] campoJuego;
 
+	public Tablero() {
+		alto = 10;
+		ancho = 10;
+		numMinas = 7;
+	}
+
 	public Tablero(int pAlto, int pAncho, int pNumMinas) {
 		alto = pAlto;
 		ancho = pAncho;

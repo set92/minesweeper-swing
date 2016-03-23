@@ -8,6 +8,8 @@ public class ListaCasillas {
     public ListaCasillas(){
     	this.listaCasilla = new ArrayList<Casilla>();
     }
+    
+    public int size(){return listaCasilla.size();}
 
     public ArrayList<Casilla> getListCasilla() {
         return listaCasilla;
