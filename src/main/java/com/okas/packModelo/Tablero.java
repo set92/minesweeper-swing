@@ -1,4 +1,4 @@
-package packModelo;
+package com.okas.packModelo;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -11,17 +11,10 @@ public class Tablero {
 	private Casilla[][] campoJuego;
     private static boolean minasPuestas = false;//Flag para ver si estan puestas las minas
 
-	public Tablero() {
-		alto = 10;
-		ancho = 10;
-		numMinas = 7;
-	}
-
 	public Tablero(int pAlto, int pAncho) {
 		alto = pAlto;
 		ancho = pAncho;
 		campoJuego = new Casilla[pAlto][pAncho];
-
 	}
 
     public int getAlto() {
@@ -163,19 +156,6 @@ public class Tablero {
 		System.out.println(res);
 	}
 
-	public void imprimirCampoDescubierto() {
-		String res = "";
-		for (int s = 0; s < alto; s++) {
-			for (int c = 0; c < ancho; c++) {
-				if (campoJuego[s][c].descubierta)
-					res += "\t" + "D";
-				else
-					res += "\t" + "N";
-			}
-			res += "\n";
-		}
-		System.out.println(res);
-	}
 //TODO CODIGO NUEVO
     public ArrayList<Casilla> mostrarCasillaValorCero(int pFil, int pCol){
         ArrayList<Casilla>[] listas;

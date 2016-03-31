@@ -1,4 +1,4 @@
-package packModelo;
+package com.okas.packModelo;
 
 public class CasillaValor extends Casilla {
     private int valor;

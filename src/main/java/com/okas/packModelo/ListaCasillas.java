@@ -1,4 +1,4 @@
-package packModelo;
+package com.okas.packModelo;
 
 import java.util.ArrayList;
 

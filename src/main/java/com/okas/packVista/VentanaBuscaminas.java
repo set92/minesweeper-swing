@@ -31,12 +31,12 @@ public class VentanaBuscaminas extends JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if (b.getAlto() == 7)
+        if (b.getTablero().getAlto() == 7)
             setBounds(100, 100, 450, 300);
-        else if (b.getAlto() == 10)
+        else if (b.getTablero().getAlto() == 10)
             setBounds(100, 100, 650, 450);
-        else if (b.getAlto() == 12)
-            setBounds(100, 100, 850, 600);
+        else if (b.getTablero().getAlto() == 12)
+            setBounds(100, 100, 1050, 600);
 
         JPanel contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(3, 3, 3, 3));
@@ -45,7 +45,7 @@ public class VentanaBuscaminas extends JFrame {
 
         contentPane.add(getMatrizCampoJuego(), BorderLayout.CENTER);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
     private JPanel getMatrizCampoJuego() {
