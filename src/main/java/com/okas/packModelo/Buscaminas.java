@@ -5,6 +5,7 @@ public class Buscaminas {
 
     private TableroBuilder tableroBuilder;
     private Tablero tablero;
+    private Contador contador;
    // private int puntuacion;
    // private int tiempo;
     private static Buscaminas miBuscaminas = null;
@@ -23,6 +24,10 @@ public class Buscaminas {
     		miBuscaminas = new Buscaminas();
     	}
     	return miBuscaminas;
+    }
+    
+    public Contador getContador(){
+    	return contador;
     }
     
     public Tablero getTablero(){

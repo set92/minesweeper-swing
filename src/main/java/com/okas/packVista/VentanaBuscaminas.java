@@ -107,7 +107,7 @@ public class VentanaBuscaminas extends JFrame {
                 if (cas[i][j] instanceof CasillaMina) {
                     getCasilla(i, j).setFont(new Font("Arial", Font.BOLD, 12));
                     getCasilla(i, j).setBackground(Color.WHITE);
-                    getCasilla(i, j).setText("B");
+                    getCasilla(i, j).setText("M");
                 }
     }
 
@@ -182,6 +182,30 @@ public class VentanaBuscaminas extends JFrame {
             }
             if (finJuego()) salirJuego();
         }
+        if (SwingUtilities.isRightMouseButton(e)) {
+        	
+            if (!cas[pFila][pCol].getMarcadaBandera()) {
+                ponerBandera(pFila,pCol);
+                cas[pFila][pCol].marcarBandera();
+                b.getContador().update(-1);
+            }
+            else {
+            	quitarBandera(pFila,pCol);
+                cas[pFila][pCol].quitarBandera();
+                b.getContador().update(1);
+            }
+        }
+    }
+    
+    private void ponerBandera(int pFila, int pCol){
+    	getCasilla(pFila,pCol).setBackground(Color.WHITE);
+    	getCasilla(pFila,pCol).setBackground(Color.BLACK); //Tengo que poner la banderita
+    	getCasilla(pFila,pCol).setText("B");
+    }
+    
+    private void quitarBandera(int pFila, int pCol){
+    	getCasilla(pFila,pCol).setBackground(Color.WHITE);
+    	getCasilla(pFila,pCol).setText("");
     }
 }
 
