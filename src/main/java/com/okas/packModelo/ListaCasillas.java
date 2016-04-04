@@ -16,9 +16,7 @@ public class ListaCasillas extends ArrayList<Casilla>{
     }
 
     public void expandirVecinos(){
-        for (Casilla cas : listaCasilla) {
-            cas.descubrirCasilla();
-        }
+        listaCasilla.forEach(Casilla::descubrirCasilla);
     }
 
 }

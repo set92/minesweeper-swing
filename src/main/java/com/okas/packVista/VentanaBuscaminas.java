@@ -26,11 +26,6 @@ public class VentanaBuscaminas extends JFrame {
     }
 
     private void initialize() {
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         if (b.getTablero().getAlto() == 7)
             setBounds(100, 100, 450, 300);
         else if (b.getTablero().getAlto() == 10)

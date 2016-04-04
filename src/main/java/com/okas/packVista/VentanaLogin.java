@@ -16,7 +16,6 @@ import java.util.Vector;
 
 public class VentanaLogin extends JFrame {
 
-	private JPanel contentPane;
 	private JComboBox<String> comboBox;
 	private JLabel lblNivel;
     private JLabel lblUser;
@@ -29,7 +28,12 @@ public class VentanaLogin extends JFrame {
 
 	public static VentanaLogin getVentana(){
 		if(ventana==null){
-			ventana=new VentanaLogin();
+            try {
+                UIManager.setLookAndFeel("com.jtattoo.plaf.luna.LunaLookAndFeel");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            ventana=new VentanaLogin();
 		}
 		return ventana;
 	}
@@ -38,10 +42,11 @@ public class VentanaLogin extends JFrame {
 		initialize();
 	}
 	private void initialize() {
+
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		addWindowListener(getControlador());
 		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
+		JPanel contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
@@ -166,7 +171,7 @@ public class VentanaLogin extends JFrame {
 			if(e.getActionCommand().equals("startGame")){
 				jugar();
             } else if (e.getActionCommand().equals("displayRanking")){
-
+                VentanaRanking.getVentana().setVisible(true);
 			}
 		}
 	}

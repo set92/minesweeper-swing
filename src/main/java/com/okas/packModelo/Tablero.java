@@ -29,10 +29,6 @@ public class Tablero {
         return numMinas;
     }
 
-    public void setCampoJuego(Casilla[][] pCampo) {
-		campoJuego = pCampo;
-	}
-
 	public Casilla[][] getCampoJuego() {
 		return campoJuego;
 	}
