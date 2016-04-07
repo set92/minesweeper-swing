@@ -1,6 +1,6 @@
 package com.okas.packModelo;
 
-public abstract class Casilla {
+public abstract class Casilla extends Observable {
     protected Coordenada pos;
     protected boolean marcadaBandera;
     protected boolean descubierta;
@@ -17,7 +17,10 @@ public abstract class Casilla {
 
     public Coordenada getCoordenada(){return this.pos;}
     
-    public void marcarBandera(){this.marcadaBandera = true;}
+    public void marcarBandera(){
+    	this.marcadaBandera = true;
+    	this.notificar(1);
+    	}
     
     public void desmarcarVacia(){this.marcadaBandera = false;}
     
@@ -29,6 +32,7 @@ public abstract class Casilla {
 
     public void quitarBandera() {
         this.marcadaBandera = false;
+        this.notificar(-1);
     }
 
     public boolean getMarcadaBandera() {

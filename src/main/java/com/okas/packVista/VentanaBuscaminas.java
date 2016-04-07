@@ -2,6 +2,7 @@ package com.okas.packVista;
 
 import com.okas.packModelo.*;
 
+import javax.print.DocFlavor.URL;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -26,11 +27,6 @@ public class VentanaBuscaminas extends JFrame {
     }
 
     private void initialize() {
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         if (b.getTablero().getAlto() == 7)
             setBounds(100, 100, 450, 300);
         else if (b.getTablero().getAlto() == 10)
@@ -105,7 +101,7 @@ public class VentanaBuscaminas extends JFrame {
         for (int i = 0; i < b.getAlto(); i++)
             for (int j = 0; j < b.getAncho(); j++)
                 if (cas[i][j] instanceof CasillaMina) {
-                    getCasilla(i, j).setFont(new Font("Arial", Font.BOLD, 12));
+                	getCasilla(i, j).setFont(new Font("Arial", Font.BOLD, 12));
                     getCasilla(i, j).setBackground(Color.WHITE);
                     getCasilla(i, j).setText("M");
                 }
@@ -198,14 +194,16 @@ public class VentanaBuscaminas extends JFrame {
     }
     
     private void ponerBandera(int pFila, int pCol){
-    	getCasilla(pFila,pCol).setBackground(Color.WHITE);
+    	/*getCasilla(pFila,pCol).setBackground(Color.WHITE);
     	getCasilla(pFila,pCol).setBackground(Color.BLACK); //Tengo que poner la banderita
-    	getCasilla(pFila,pCol).setText("B");
+    	getCasilla(pFila,pCol).setText("B");*/
+    	getCasilla(pFila,pCol).setIcon(new ImageIcon("C:/Users/Olatz/Desktop/BUSCAMINAS_IS/ImagenBandera.png"));
     }
     
     private void quitarBandera(int pFila, int pCol){
-    	getCasilla(pFila,pCol).setBackground(Color.WHITE);
-    	getCasilla(pFila,pCol).setText("");
+    	/*getCasilla(pFila,pCol).setBackground(Color.WHITE);
+    	getCasilla(pFila,pCol).setText("");*/
+    	getCasilla(pFila,pCol).setIcon(new ImageIcon());
     }
 }
 

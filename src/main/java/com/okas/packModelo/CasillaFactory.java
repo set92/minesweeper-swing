@@ -13,9 +13,17 @@ public class CasillaFactory {
 
 	public Casilla createCasilla (String pTipoCasilla, Coordenada pCoord){
 		Casilla miCasilla = null;
-		if (pTipoCasilla.equals("Cero")){miCasilla = new CasillaValorCero(pCoord);}
-		else if (pTipoCasilla.equals("Valor")){miCasilla = new CasillaValor(pCoord);}
-		else if (pTipoCasilla.equals("Mina")){miCasilla = new CasillaMina(pCoord);}
+        switch (pTipoCasilla) {
+            case "Cero":
+                miCasilla = new CasillaValorCero(pCoord);
+                break;
+            case "Valor":
+                miCasilla = new CasillaValor(pCoord);
+                break;
+            case "Mina":
+                miCasilla = new CasillaMina(pCoord);
+                break;
+        }
 		return miCasilla;
 	}
 
