@@ -121,7 +121,9 @@ public class VentanaBuscaminas extends JFrame {
     private void mostrarCasillasVacias(int pFila, int pCol) {
         ArrayList<Casilla> arrayList = Buscaminas.getBuscaminas().getTablero().mostrarCasillaValorCero(pFila,pCol);
         for (Casilla cas1 : arrayList) {
-            if (cas1 instanceof CasillaValorCero) {
+          if (cas1.getMarcadaBandera()){}
+          	
+          else if (cas1 instanceof CasillaValorCero) {
                 mostrarCasVacia(cas1.getCoordenada().getAlto(), cas1.getCoordenada().getAncho());
             }
 //            else {
