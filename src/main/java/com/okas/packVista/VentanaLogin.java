@@ -183,6 +183,6 @@ public class VentanaLogin extends JFrame {
         else user = new Usuario(getTextField().getText(), 0);
 
         Buscaminas.getBuscaminas().crearJuego(Integer.parseInt(getComboBox().getSelectedItem().toString()));
-        VentanaBuscaminas.getVentana().setVisible(true);
+        VentanaBuscaminas.getVentana().getJf().setVisible(true);
     }
 }

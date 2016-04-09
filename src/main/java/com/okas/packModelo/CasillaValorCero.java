@@ -1,5 +1,8 @@
 package com.okas.packModelo;
 
+import java.util.*;
+import java.util.Observable;
+
 public class CasillaValorCero extends Casilla {
 
 	private ListaCasillas lista;
@@ -27,5 +30,4 @@ public class CasillaValorCero extends Casilla {
 		lista.expandirVecinos();
 		
 	}
-
 }

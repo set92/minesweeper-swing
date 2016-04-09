@@ -2,7 +2,6 @@ package com.okas.packVista;
 
 import com.okas.packModelo.*;
 
-import javax.print.DocFlavor.URL;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -10,15 +9,28 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
-public class VentanaBuscaminas extends JFrame {
+public class VentanaBuscaminas {
+    public JFrame getJf() {
+        return jf;
+    }
+
+    public static JFrame jf;
     private JPanel matrizCampoJuego;
+    private JPanel panelBotonesSup;
     private JButton[][] matrizBotones;
+
+    private JLabel lblNumMinas;
+    private JButton btnReiniciar;
+    private JLabel lblTiempo;
+
     private Casilla[][] cas;
     private static VentanaBuscaminas ventana;
     private Buscaminas b = Buscaminas.getBuscaminas();//Lo pongo aqui para solo ponerlo 1 vez (variable local)
-    
+    public final DescubrirCasillaObservable observable = new DescubrirCasillaObservable();
+
     public static VentanaBuscaminas getVentana() {
         if (ventana == null) ventana = new VentanaBuscaminas();
+
         return ventana;
     }
 
@@ -27,21 +39,77 @@ public class VentanaBuscaminas extends JFrame {
     }
 
     private void initialize() {
+        jf = new JFrame();
         if (b.getTablero().getAlto() == 7)
-            setBounds(100, 100, 450, 300);
+            jf.setBounds(100, 100, 450, 300);
         else if (b.getTablero().getAlto() == 10)
-            setBounds(100, 100, 650, 450);
+            jf.setBounds(100, 100, 650, 450);
         else if (b.getTablero().getAlto() == 12)
-            setBounds(100, 100, 1050, 600);
+            jf.setBounds(100, 100, 1050, 600);
 
         JPanel contentPane = new JPanel();
+        jf.setContentPane(contentPane);
+        jf.setTitle("Buscaminas");
         contentPane.setBorder(new EmptyBorder(3, 3, 3, 3));
-        this.setContentPane(contentPane);
         contentPane.setLayout(new BorderLayout(0, 0));
 
+        contentPane.add(getBotonesSup(), BorderLayout.NORTH);
         contentPane.add(getMatrizCampoJuego(), BorderLayout.CENTER);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        jf.setLocationRelativeTo(null);
+        jf.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    }
+
+    private JPanel getBotonesSup() {
+        if (panelBotonesSup == null) {
+            panelBotonesSup = new JPanel();
+            panelBotonesSup.setPreferredSize(new Dimension(60, 50));
+            GroupLayout gl_botonesSup = new GroupLayout(panelBotonesSup);
+            gl_botonesSup.setHorizontalGroup(
+                    gl_botonesSup.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                            .addGroup(gl_botonesSup.createSequentialGroup()
+                                    .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(getLblNumMinas())
+                                    .addGap(6)
+                                    .addComponent(getBtnReiniciar(), GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE)
+                                    .addGap(10)
+                                    .addComponent(getLblTiempo(), GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGap(110)));
+            gl_botonesSup.setVerticalGroup(
+                    gl_botonesSup.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                            .addGroup(gl_botonesSup.createSequentialGroup()
+                                    .addContainerGap(22, Short.MAX_VALUE)
+                                    .addGroup(gl_botonesSup.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                            .addGroup(gl_botonesSup.createSequentialGroup()
+                                                    .addGap(4)
+                                                    .addComponent(getLblNumMinas()))
+                                            .addComponent(getBtnReiniciar())
+                                            .addGroup(gl_botonesSup.createSequentialGroup()
+                                                    .addGap(4)
+                                                    .addGroup(gl_botonesSup.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                                            .addComponent(getLblTiempo())
+                                                    )))
+                                    .addGap(20)));
+            panelBotonesSup.setBackground(Color.WHITE);
+            panelBotonesSup.setLayout(gl_botonesSup);
+        }
+        return panelBotonesSup;
+    }
+
+    private JLabel getLblNumMinas() {
+        if (lblNumMinas == null) lblNumMinas = new JLabel("Minas:");
+
+        return lblNumMinas;
+    }
+    private JButton getBtnReiniciar() {
+        if (btnReiniciar == null) btnReiniciar = new JButton("Reiniciar");
+
+        return btnReiniciar;
+    }
+    private JLabel getLblTiempo() {
+        if (lblTiempo == null) lblTiempo = new JLabel("Tiempo: ");
+
+        return lblTiempo;
     }
 
     private JPanel getMatrizCampoJuego() {
@@ -74,9 +142,14 @@ public class VentanaBuscaminas extends JFrame {
     }
 
     private JButton getCasilla(int pFila, int pColum) {
+        cas = b.getTablero().getCampoJuego();
+
         if (getMatrizBotones()[pFila][pColum] == null) {
             getMatrizBotones()[pFila][pColum] = new JButton();
             getMatrizBotones()[pFila][pColum].setFocusable(false);
+
+            observable.addObserver(cas[pFila][pColum]);
+
             getMatrizBotones()[pFila][pColum].addMouseListener(new MouseListener() {
                 public void mouseReleased(MouseEvent e) {}
                 public void mousePressed(MouseEvent e) {}
@@ -159,7 +232,7 @@ public class VentanaBuscaminas extends JFrame {
     }
 
     private void salirJuego() {
-        VentanaBuscaminas.getVentana().setVisible(false);
+        jf.setVisible(false);
         JOptionPane.showMessageDialog(null, "HAS GANADO");
         //MANDAR A RANKING
     }
@@ -173,6 +246,7 @@ public class VentanaBuscaminas extends JFrame {
                 JOptionPane.showMessageDialog(null, "GAME OVER");
             } else if (cas[pFila][pCol] instanceof CasillaValor) {
                 mostrarCasillaValor(pFila, pCol);
+                observable.changeData(cas[pFila][pCol]);
             } else if (cas[pFila][pCol] instanceof CasillaValorCero) {
                 mostrarCasillasVacias(pFila, pCol);
             }

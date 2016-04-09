@@ -1,6 +1,8 @@
 package com.okas.packModelo;
 
-public abstract class Casilla extends Observable {
+import java.util.Observer;
+
+public abstract class Casilla extends Observable implements Observer {
     protected Coordenada pos;
     protected boolean marcadaBandera;
     protected boolean descubierta;
@@ -10,7 +12,11 @@ public abstract class Casilla extends Observable {
     	this.descubierta = false;
     	this.marcadaBandera = false;
     }
-    
+
+    public void update(java.util.Observable o, Object arg) {
+        ((Casilla)arg).marcarDescubierta();
+    }
+
     public void descubrirCasilla(){
     	if (!descubierta) marcarDescubierta();
     }
@@ -20,7 +26,7 @@ public abstract class Casilla extends Observable {
     public void marcarBandera(){
     	this.marcadaBandera = true;
     	this.notificar(1);
-    	}
+    }
     
     public void desmarcarVacia(){this.marcadaBandera = false;}
     

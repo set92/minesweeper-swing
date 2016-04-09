@@ -1,5 +1,6 @@
 package com.okas.packModelo;
 
+import com.okas.packVista.VentanaBuscaminas;
 import com.okas.packVista.VentanaLogin;
 
 public class Main {
@@ -9,7 +10,7 @@ public class Main {
         VentanaLogin.getVentana().setVisible(true);
 
         //Buscaminas.getBuscaminas().crearJuego(1);
-        //VentanaBuscaminas.getVentana().setVisible(true);
+        //VentanaBuscaminas.getVentana().getJf().setVisible(true);
 	}
 
 }
