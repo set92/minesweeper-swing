@@ -14,8 +14,9 @@ public abstract class TableroBuilder {
 		generarTablero();
 		ponerCasillasBomba();
 		ponerCasillasRestantes();
+		tablero.crearListas();
 		return tablero;
-		//tablero.crearListas();
+		
 	}
 
 	public abstract void ponerCasillasBomba();

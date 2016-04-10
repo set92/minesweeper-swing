@@ -7,7 +7,6 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
 
 public class VentanaBuscaminas {
     public JFrame getJf() {
@@ -179,30 +178,20 @@ public class VentanaBuscaminas {
                     getCasilla(i, j).setText("M");
                 }
     }
-
-//    private void mostrarCasillasVacias(int pFila, int pCol) {
-//        cas = b.getTablero().getCampoJuego();
-//        ListaCasillas devol = ((CasillaValorCero) cas[pFila][pCol]).getLista();
-//        for (Casilla csl : devol.getListCasilla()) {
-//            if (csl instanceof CasillaValorCero) {
-//                csl.descubrirCasilla();
-//
-//            }
-//            //else casilla valor
-//        }
-//    }
+    
     private void mostrarCasillasVacias(int pFila, int pCol) {
-        ArrayList<Casilla> arrayList = Buscaminas.getBuscaminas().getTablero().mostrarCasillaValorCero(pFila,pCol);
-        for (Casilla cas1 : arrayList) {
-          if (cas1.getMarcadaBandera()){}
-          	
-          else if (cas1 instanceof CasillaValorCero) {
-                mostrarCasVacia(cas1.getCoordenada().getAlto(), cas1.getCoordenada().getAncho());
-            }
-//            else {
-//                mostrarCasillaValor(cas1.getCoordenada().getAlto(),cas1.getCoordenada().getAncho());
-//            }
+        Buscaminas.getBuscaminas().getTablero().descubrirCasilla(cas[pFila][pCol]);
+        for (int i=0; i<Buscaminas.getBuscaminas().getAlto(); i++){
+        	for (int j=0; j<Buscaminas.getBuscaminas().getAncho(); j++){
+        		if (cas[i][j].isDescubierta())
+        			mostrarCasilla(i,j);
+        	}
         }
+    }
+    
+    private void mostrarCasilla(int pFila, int pCol){
+    	if (cas[pFila][pCol] instanceof CasillaValorCero) mostrarCasVacia(pFila,pCol);
+    	else if (cas[pFila][pCol] instanceof CasillaValor)  mostrarCasillaValor(pFila, pCol);
     }
 
     private void mostrarCasVacia(int pFila, int pCol) {

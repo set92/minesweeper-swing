@@ -1,6 +1,5 @@
 package com.okas.packModelo;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Tablero {
@@ -151,56 +150,4 @@ public class Tablero {
 		}
 		System.out.println(res);
 	}
-
-//TODO CODIGO NUEVO
-    public ArrayList<Casilla> mostrarCasillaValorCero(int pFil, int pCol){
-        ArrayList<Casilla>[] listas;
-        ArrayList<Casilla> aDevolver = new ArrayList<Casilla>();
-        ArrayList<Casilla> aux = new ArrayList<Casilla>();
-        int index = 0;
-        Casilla cas = campoJuego[pFil][pCol];
-        int fila, columna;
-        aux.add(cas);
-        while(recorrer(aux,index)){
-            cas = aux.get(index);
-            fila = cas.getCoordenada().getAlto();
-            columna = cas.getCoordenada().getAncho();
-            campoJuego[fila][columna].marcarDescubierta();
-            aDevolver.add(cas);
-            listas = checkCasValorCero(aDevolver, aux, fila+1, columna+1);
-            listas = checkCasValorCero(aDevolver, aux, fila+1, columna);
-            listas = checkCasValorCero(aDevolver, aux, fila+1, columna-1);
-            listas = checkCasValorCero(aDevolver, aux, fila, columna+1);
-            listas = checkCasValorCero(aDevolver, aux, fila, columna-1);
-            listas = checkCasValorCero(aDevolver, aux, fila-1, columna+1);
-            listas = checkCasValorCero(aDevolver, aux, fila-1, columna);
-            listas = checkCasValorCero(aDevolver, aux, fila-1, columna-1);
-            aux = listas[0];
-            aDevolver = listas[1];
-            index++;
-        }
-        return aDevolver;
-    }
-    private boolean recorrer(ArrayList<Casilla> pMirar,int pIndex){
-        boolean flag = false;
-        try{
-            pMirar.get(pIndex);
-            flag=true;
-        }catch(Exception e){}
-        return flag;
-    }
-
-    private ArrayList<Casilla>[] checkCasValorCero(ArrayList<Casilla> pDevol, ArrayList<Casilla> pMirar, int pFila, int pCol){
-        ArrayList<Casilla>[] listas = new ArrayList[2];
-        try{
-            if(campoJuego[pFila][pCol]instanceof CasillaValorCero && !campoJuego[pFila][pCol].isDescubierta())
-                pMirar.add(campoJuego[pFila][pCol]);
-            else if(campoJuego[pFila][pCol]instanceof CasillaValor && !campoJuego[pFila][pCol].isDescubierta())
-                pDevol.add(campoJuego[pFila][pCol]);
-        }catch(Exception e){}
-        listas[0] = pMirar;
-        listas[1] = pDevol;
-        return listas;
-    }
-//TODO FIN CODIGO NUEVO
 }
