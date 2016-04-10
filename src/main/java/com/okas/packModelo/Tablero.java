@@ -41,6 +41,14 @@ public class Tablero {
 	public void descubrirCasilla(Casilla cas) {
 		cas.descubrirCasilla();
 	}
+	
+	public void marcarBandera(Casilla cas){
+		cas.marcarBandera();
+	}
+	
+	public void desmarcarBandera(Casilla cas){
+		cas.desmarcarBandera();
+	}
 
 	public void crearListas() {
 		Casilla cas;

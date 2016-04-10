@@ -23,9 +23,12 @@ public class VentanaBuscaminas {
     private JLabel lblTiempo;
 
     private Casilla[][] cas;
+    private Contador cont = new Contador();
     private static VentanaBuscaminas ventana;
     private Buscaminas b = Buscaminas.getBuscaminas();//Lo pongo aqui para solo ponerlo 1 vez (variable local)
     public final DescubrirCasillaObservable observable = new DescubrirCasillaObservable();
+   // public final PonerBanderasObservable observable2 = new PonerBanderasObservable();
+
 
     public static VentanaBuscaminas getVentana() {
         if (ventana == null) ventana = new VentanaBuscaminas();
@@ -96,7 +99,7 @@ public class VentanaBuscaminas {
     }
 
     private JLabel getLblNumMinas() {
-        if (lblNumMinas == null) lblNumMinas = new JLabel("Minas:");
+        if (lblNumMinas == null) lblNumMinas = new JLabel("Minas: "+cont.getNumero());
 
         return lblNumMinas;
     }
@@ -133,21 +136,25 @@ public class VentanaBuscaminas {
     private JButton[][] getMatrizBotones() {
         if (matrizBotones == null) {
             matrizBotones = new JButton[b.getAlto()][b.getAncho()];
-            for (int i = 0; i < b.getAlto(); i++)
-                for (int j = 0; j < b.getAncho(); j++)
+            for (int i = 0; i < b.getAlto(); i++){
+                for (int j = 0; j < b.getAncho(); j++){
                     getCasilla(i, j);
+            		cas[i][j].cambiarObserver(cont);
+        		}
+    		}
         }
         return matrizBotones;
     }
 
     private JButton getCasilla(int pFila, int pColum) {
         cas = b.getTablero().getCampoJuego();
+        
 
         if (getMatrizBotones()[pFila][pColum] == null) {
             getMatrizBotones()[pFila][pColum] = new JButton();
             getMatrizBotones()[pFila][pColum].setFocusable(false);
 
-            observable.addObserver(cas[pFila][pColum]);
+           // observable.addObserver(cas[pFila][pColum]);
 
             getMatrizBotones()[pFila][pColum].addMouseListener(new MouseListener() {
                 public void mouseReleased(MouseEvent e) {}
@@ -231,7 +238,8 @@ public class VentanaBuscaminas {
     private void controlMouse(MouseEvent e, int pFila, int pCol) {
         cas = b.getTablero().getCampoJuego();
         if (SwingUtilities.isLeftMouseButton(e)) {
-            if (cas[pFila][pCol] instanceof CasillaMina) {
+        	if (cas[pFila][pCol].getMarcadaBandera()){}
+        	else if (cas[pFila][pCol] instanceof CasillaMina) {
                 mostrarMinas();
                 bloquearBotones();
                 JOptionPane.showMessageDialog(null, "GAME OVER");
@@ -244,31 +252,44 @@ public class VentanaBuscaminas {
             if (finJuego()) salirJuego();
         }
         if (SwingUtilities.isRightMouseButton(e)) {
-        	
-            if (!cas[pFila][pCol].getMarcadaBandera()) {
+        	if (cas[pFila][pCol].isDescubierta()){}
+        	else if (cont.getNumero() == 0){}
+        	else if (!cas[pFila][pCol].getMarcadaBandera()) {
                 ponerBandera(pFila,pCol);
                 cas[pFila][pCol].marcarBandera();
-                b.getContador().update(-1);
+                cas[pFila][pCol].modificarContador(-1);
+                String numeroString = String.valueOf(cont.getNumero());
+                lblNumMinas.setText("Minas: "+ numeroString);
+               // b.getContador().update(-1);
             }
-            else {
+            else if (cas[pFila][pCol].getMarcadaBandera()){
             	quitarBandera(pFila,pCol);
                 cas[pFila][pCol].quitarBandera();
-                b.getContador().update(1);
+                cas[pFila][pCol].modificarContador(1);
+                String numeroString = String.valueOf(cont.getNumero());
+                lblNumMinas.setText("Minas: "+ numeroString);
+
+               // b.getContador().update(1);
             }
+        	
+        	
         }
     }
     
     private void ponerBandera(int pFila, int pCol){
-    	/*getCasilla(pFila,pCol).setBackground(Color.WHITE);
-    	getCasilla(pFila,pCol).setBackground(Color.BLACK); //Tengo que poner la banderita
-    	getCasilla(pFila,pCol).setText("B");*/
-    	getCasilla(pFila,pCol).setIcon(new ImageIcon("C:/Users/Olatz/Desktop/BUSCAMINAS_IS/ImagenBandera.png"));
+    	//getCasilla(pFila,pCol).setBackground(Color.WHITE);
+    	//getCasilla(pFila,pCol).setBackground(Color.BLACK); //Tengo que poner la banderita
+    	getCasilla(pFila, pCol).setText("B");
+    	//getCasilla(pFila,pCol).setIcon(new ImageIcon("C:/Users/Olatz/Desktop/BUSCAMINAS_IS/ImagenBandera.png"));
     }
     
     private void quitarBandera(int pFila, int pCol){
-    	/*getCasilla(pFila,pCol).setBackground(Color.WHITE);
+    	//getCasilla(pFila,pCol).setIcon(new ImageIcon());
+    	getCasilla(pFila, pCol).setText("");
+       // getCasilla(pFila, pCol).setEnabled(false);
+       // getCasilla(pFila, pCol).setForeground(Color.BLACK);
+    	/*getCasilla(pFila,pCol).setBackground(Color.GRAY);
     	getCasilla(pFila,pCol).setText("");*/
-    	getCasilla(pFila,pCol).setIcon(new ImageIcon());
     }
 }
 
