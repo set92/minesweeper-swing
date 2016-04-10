@@ -18,7 +18,7 @@ public abstract class Casilla extends Observable implements Observer {
     }
 
     public void descubrirCasilla(){
-    	if (!descubierta) marcarDescubierta();
+    	if(!marcadaBandera) if (!descubierta) marcarDescubierta();
     }
 
     public Coordenada getCoordenada(){return this.pos;}
