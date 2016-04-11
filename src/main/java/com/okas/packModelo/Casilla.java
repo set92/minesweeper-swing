@@ -18,7 +18,7 @@ public abstract class Casilla extends PonerBanderasObservable {
     }
 
     public void descubrirCasilla(){
-    	if (!descubierta) marcarDescubierta();
+    	if (!descubierta && !marcadaBandera) marcarDescubierta();
     }
 
     public Coordenada getCoordenada(){return this.pos;}

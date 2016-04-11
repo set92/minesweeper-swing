@@ -27,7 +27,6 @@ public class VentanaBuscaminas {
     private static VentanaBuscaminas ventana;
     private Buscaminas b = Buscaminas.getBuscaminas();//Lo pongo aqui para solo ponerlo 1 vez (variable local)
     public final DescubrirCasillaObservable observable = new DescubrirCasillaObservable();
-   // public final PonerBanderasObservable observable2 = new PonerBanderasObservable();
 
 
     public static VentanaBuscaminas getVentana() {
@@ -268,8 +267,6 @@ public class VentanaBuscaminas {
                 cas[pFila][pCol].modificarContador(1);
                 String numeroString = String.valueOf(cont.getNumero());
                 lblNumMinas.setText("Minas: "+ numeroString);
-
-               // b.getContador().update(1);
             }
         	
         	

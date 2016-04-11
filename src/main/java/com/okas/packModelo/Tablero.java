@@ -33,21 +33,46 @@ public class Tablero {
 	}
 
 	public void colocarCasilla(Coordenada pCoord, Casilla pCasilla) {
-		int i = pCoord.getAlto();
-		int j = pCoord.getAncho();
-		campoJuego[i][j] = pCasilla;
+		if (this.coordenadaValida(pCoord))
+		{
+			int i = pCoord.getAlto();
+			int j = pCoord.getAncho();
+			campoJuego[i][j] = pCasilla;
+		}
 	}
+	public boolean coordenadaValida(Coordenada pCoord){
+		boolean valid = false;
+		if (pCoord.getAlto() >= 0 && pCoord.getAncho() >= 0){
+			if (pCoord.getAlto() <= this.alto && pCoord.getAncho() <= this.ancho){
+				valid = true;
+			}
+		}
+		return valid;
+	}	
 
 	public void descubrirCasilla(Casilla cas) {
-		cas.descubrirCasilla();
+		if (this.esValida(cas))
+			cas.descubrirCasilla();
+	}
+	
+	public boolean esValida (Casilla cas){
+		boolean valida = false;
+		if (cas.getCoordenada().getAlto() >= 0 && cas.getCoordenada().getAncho() >= 0){
+			if (cas.getCoordenada().getAlto() <= this.alto && cas.getCoordenada().getAncho() <= this.ancho){
+				valida = true;
+			}
+		}
+		return valida;
 	}
 	
 	public void marcarBandera(Casilla cas){
-		cas.marcarBandera();
+		if (this.esValida(cas))
+			cas.marcarBandera();
 	}
 	
 	public void desmarcarBandera(Casilla cas){
-		cas.desmarcarBandera();
+		if (this.esValida(cas))
+			cas.desmarcarBandera();
 	}
 
 	public void crearListas() {
