@@ -9,7 +9,7 @@ public class PonerBanderasObservable {
 		observer = pOb;
 	}
 	
-    public void modificarContador(int n){
+    public void notificar(int n){
         //setChanged()
         observer.update(n);
     }

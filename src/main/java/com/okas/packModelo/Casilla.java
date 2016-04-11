@@ -27,6 +27,7 @@ public abstract class Casilla extends PonerBanderasObservable {
     	if (!descubierta){
     		if (!marcadaBandera){
     			this.marcadaBandera = true;	
+    			this.notificar(-1);
     		}
  
     	}
@@ -35,6 +36,7 @@ public abstract class Casilla extends PonerBanderasObservable {
     	if (!descubierta){
     		if (marcadaBandera){
     			this.marcadaBandera = false;	
+    			this.notificar(1);
     		}
  
     	}

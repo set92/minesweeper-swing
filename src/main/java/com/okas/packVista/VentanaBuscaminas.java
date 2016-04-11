@@ -256,7 +256,6 @@ public class VentanaBuscaminas {
         	else if (!cas[pFila][pCol].getMarcadaBandera()) {
                 ponerBandera(pFila,pCol);
                 cas[pFila][pCol].marcarBandera();
-                cas[pFila][pCol].modificarContador(-1);
                 String numeroString = String.valueOf(cont.getNumero());
                 lblNumMinas.setText("Minas: "+ numeroString);
                // b.getContador().update(-1);
@@ -264,7 +263,6 @@ public class VentanaBuscaminas {
             else if (cas[pFila][pCol].getMarcadaBandera()){
             	quitarBandera(pFila,pCol);
                 cas[pFila][pCol].quitarBandera();
-                cas[pFila][pCol].modificarContador(1);
                 String numeroString = String.valueOf(cont.getNumero());
                 lblNumMinas.setText("Minas: "+ numeroString);
             }
