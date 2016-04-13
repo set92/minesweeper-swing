@@ -17,11 +17,11 @@ public class VentanaBuscaminas {
     private JPanel matrizCampoJuego;
     private JPanel panelBotonesSup;
     private JButton[][] matrizBotones;
-    
+
     private JLabel lblNumMinas;
     private JButton btnReiniciar;
     private JLabel lblTiempo;
-    private Reloj reloj;
+
     private Casilla[][] cas;
     private Contador cont = new Contador();
     private static VentanaBuscaminas ventana;
@@ -104,14 +104,15 @@ public class VentanaBuscaminas {
     }
     private JButton getBtnReiniciar() {
         if (btnReiniciar == null) btnReiniciar = new JButton("Reiniciar");
-<<<<<<< HEAD
         btnReiniciar.addMouseListener(new MouseListener(){
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+		        VentanaBuscaminas.getVentana().getJf().setVisible(false);
 				Buscaminas.getBuscaminas().reiniciar();
 				ventana = new VentanaBuscaminas();
+		        VentanaBuscaminas.getVentana().getJf().setVisible(true);
+
 			}
 
 			@Override
@@ -138,14 +139,11 @@ public class VentanaBuscaminas {
         });
         
 			
-=======
-        	//b.getTablero().getCampoJuego(); ??  CREAR UN NUEVO TABLERO O REINICIAR EL MISMO??
->>>>>>> 4f4446599d8da4c7492ed1ebe0feb93710072b9e
         return btnReiniciar;
     }
     private JLabel getLblTiempo() {
-        if (lblTiempo == null) lblTiempo = new JLabel("Tiempo: "); //meter la interfaz del reloj aqui!
-        	
+        if (lblTiempo == null) lblTiempo = new JLabel("Tiempo: ");
+
         return lblTiempo;
     }
 
@@ -265,7 +263,7 @@ public class VentanaBuscaminas {
     }
 
     private void salirJuego() {
-        jf.setVisible(false);
+        //jf.setVisible(false); COMENTO PORQUE SI NO SE CIERRA TODO
         JOptionPane.showMessageDialog(null, "HAS GANADO");
         //MANDAR A RANKING
     }
