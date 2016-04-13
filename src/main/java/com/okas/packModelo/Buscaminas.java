@@ -1,5 +1,6 @@
 package com.okas.packModelo;
 
+import com.okas.packVista.Reloj;
 
 public class Buscaminas {
 
@@ -7,7 +8,7 @@ public class Buscaminas {
     private Tablero tablero;
     private Contador contador;
    // private int puntuacion;
-   // private int tiempo;
+    private Reloj reloj;
     private static Buscaminas miBuscaminas = null;
 
     private Buscaminas(){}
