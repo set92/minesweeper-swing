@@ -25,7 +25,7 @@ public class VentanaLogin extends JFrame {
 	private JButton btnStartGame;
 	private Controlador controlador;
 	private static VentanaLogin ventana;
-
+	
 	public static VentanaLogin getVentana(){
 		if(ventana==null){
             try {

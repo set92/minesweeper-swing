@@ -10,7 +10,12 @@ public class Tablero {
 	private Casilla[][] campoJuego;
     private static boolean minasPuestas = false;//Flag para ver si estan puestas las minas
 
-	public Tablero(int pAlto, int pAncho) {
+	public void cancelarMinas()
+	{
+		minasPuestas=false;
+	}
+    
+    public Tablero(int pAlto, int pAncho) {
 		alto = pAlto;
 		ancho = pAncho;
 		campoJuego = new Casilla[pAlto][pAncho];

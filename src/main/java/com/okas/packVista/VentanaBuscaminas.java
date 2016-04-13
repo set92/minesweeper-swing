@@ -104,7 +104,39 @@ public class VentanaBuscaminas {
     }
     private JButton getBtnReiniciar() {
         if (btnReiniciar == null) btnReiniciar = new JButton("Reiniciar");
+        btnReiniciar.addMouseListener(new MouseListener(){
 
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				Buscaminas.getBuscaminas().reiniciar();
+				ventana = new VentanaBuscaminas();
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+        });
+        
+			
         return btnReiniciar;
     }
     private JLabel getLblTiempo() {
@@ -233,7 +265,6 @@ public class VentanaBuscaminas {
         JOptionPane.showMessageDialog(null, "HAS GANADO");
         //MANDAR A RANKING
     }
-
     private void controlMouse(MouseEvent e, int pFila, int pCol) {
         cas = b.getTablero().getCampoJuego();
         if (SwingUtilities.isLeftMouseButton(e)) {

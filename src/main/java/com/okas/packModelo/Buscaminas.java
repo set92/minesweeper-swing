@@ -3,6 +3,7 @@ package com.okas.packModelo;
 
 public class Buscaminas {
 
+	private int nivel;
     private Tablero tablero;
     private Contador contador;
    // private int puntuacion;
@@ -17,8 +18,24 @@ public class Buscaminas {
     public Contador getContador(){
         return contador;
     }
+    
+    public Buscaminas reiniciarBuscaminas()
+    {
+    	miBuscaminas = new Buscaminas();
+    	return miBuscaminas;
+    }
+    
     public Tablero getTablero(){
         return tablero;
+    }
+    
+    public int getNivel(){
+    	return nivel;
+    }
+    
+    public void reiniciar(){
+    	getTablero().cancelarMinas();
+		crearJuego(getNivel());
     }
 
     public static Buscaminas getBuscaminas(){
@@ -30,6 +47,7 @@ public class Buscaminas {
 
     public void crearJuego(int nivel){
         tablero = Director.getDirector().construirTablero(nivel);
+        this.nivel = nivel;
     }
 
 }
