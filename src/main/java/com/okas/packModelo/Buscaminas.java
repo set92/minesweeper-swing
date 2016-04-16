@@ -19,13 +19,7 @@ public class Buscaminas {
     public Contador getContador(){
         return contador;
     }
-    
-    public Buscaminas reiniciarBuscaminas()
-    {
-    	miBuscaminas = new Buscaminas();
-    	return miBuscaminas;
-    }
-    
+
     public Tablero getTablero(){
         return tablero;
     }
@@ -34,7 +28,7 @@ public class Buscaminas {
     	return nivel;
     }
     
-    public void reiniciar(){
+    public void reiniciar() {
     	getTablero().cancelarMinas();
 		crearJuego(getNivel());
     }

@@ -13,10 +13,6 @@ public abstract class Casilla extends PonerBanderasObservable {
     	this.marcadaBandera = false;
     }
 
-    public void update(java.util.Observable o, Object arg) {
-        ((Casilla)arg).marcarDescubierta();
-    }
-
     public void descubrirCasilla(){
     	if (!descubierta && !marcadaBandera) marcarDescubierta();
     }
@@ -41,7 +37,6 @@ public abstract class Casilla extends PonerBanderasObservable {
  
     	}
     }
-    
     
     public void desmarcarVacia(){this.marcadaBandera = false;}
     

@@ -5,8 +5,7 @@ import com.okas.packModelo.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 
 public class VentanaBuscaminas {
     public JFrame getJf() {
@@ -28,10 +27,8 @@ public class VentanaBuscaminas {
     private Buscaminas b = Buscaminas.getBuscaminas();//Lo pongo aqui para solo ponerlo 1 vez (variable local)
     public final DescubrirCasillaObservable observable = new DescubrirCasillaObservable();
 
-
     public static VentanaBuscaminas getVentana() {
         if (ventana == null) ventana = new VentanaBuscaminas();
-
         return ventana;
     }
 
@@ -103,42 +100,11 @@ public class VentanaBuscaminas {
         return lblNumMinas;
     }
     private JButton getBtnReiniciar() {
-        if (btnReiniciar == null) btnReiniciar = new JButton("Reiniciar");
-        btnReiniciar.addMouseListener(new MouseListener(){
+        if (btnReiniciar == null) {
+            btnReiniciar = new JButton("Reiniciar");
+            btnReiniciar.addActionListener( e -> Buscaminas.getBuscaminas().reiniciar());
+        }
 
-			@Override
-			public void mouseClicked(MouseEvent e) {
-		        VentanaBuscaminas.getVentana().getJf().setVisible(false);
-				Buscaminas.getBuscaminas().reiniciar();
-				ventana = new VentanaBuscaminas();
-		        VentanaBuscaminas.getVentana().getJf().setVisible(true);
-
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-        });
-        
-			
         return btnReiniciar;
     }
     private JLabel getLblTiempo() {
@@ -181,13 +147,10 @@ public class VentanaBuscaminas {
 
     private JButton getCasilla(int pFila, int pColum) {
         cas = b.getTablero().getCampoJuego();
-        
 
         if (getMatrizBotones()[pFila][pColum] == null) {
             getMatrizBotones()[pFila][pColum] = new JButton();
             getMatrizBotones()[pFila][pColum].setFocusable(false);
-
-           // observable.addObserver(cas[pFila][pColum]);
 
             getMatrizBotones()[pFila][pColum].addMouseListener(new MouseListener() {
                 public void mouseReleased(MouseEvent e) {}
@@ -291,7 +254,6 @@ public class VentanaBuscaminas {
                 cas[pFila][pCol].marcarBandera();
                 String numeroString = String.valueOf(cont.getNumero());
                 lblNumMinas.setText("Minas: "+ numeroString);
-               // b.getContador().update(-1);
             }
             else if (cas[pFila][pCol].getMarcadaBandera()){
             	quitarBandera(pFila,pCol);
@@ -305,19 +267,13 @@ public class VentanaBuscaminas {
     }
     
     private void ponerBandera(int pFila, int pCol){
-    	//getCasilla(pFila,pCol).setBackground(Color.WHITE);
-    	//getCasilla(pFila,pCol).setBackground(Color.BLACK); //Tengo que poner la banderita
     	getCasilla(pFila, pCol).setText("B");
-    	//getCasilla(pFila,pCol).setIcon(new ImageIcon("C:/Users/Olatz/Desktop/BUSCAMINAS_IS/ImagenBandera.png"));
+
     }
     
     private void quitarBandera(int pFila, int pCol){
-    	//getCasilla(pFila,pCol).setIcon(new ImageIcon());
     	getCasilla(pFila, pCol).setText("");
-       // getCasilla(pFila, pCol).setEnabled(false);
-       // getCasilla(pFila, pCol).setForeground(Color.BLACK);
-    	/*getCasilla(pFila,pCol).setBackground(Color.GRAY);
-    	getCasilla(pFila,pCol).setText("");*/
+
     }
 }
 
