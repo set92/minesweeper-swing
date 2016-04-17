@@ -42,7 +42,7 @@ public class BanderaTest {
 	@Test
 	public void testMarcarBandera() {
 		Buscaminas.getBuscaminas().crearJuego(1);
-		Tablero tb = Buscaminas.getBuscaminas().getTablero();
+		Tablero tb = Buscaminas.getBuscaminas().crearJuego(1);
 		tb.colocarCasilla(c1, cas1);
 		tb.colocarCasilla(c2, cas2);
 		tb.colocarCasilla(c3, cas3);

@@ -38,11 +38,11 @@ public class VentanaBuscaminas {
 
     private void initialize() {
         jf = new JFrame();
-        if (b.getTablero().getAlto() == 7)
+        if (b.getAlto() == 7)
             jf.setBounds(100, 100, 450, 300);
-        else if (b.getTablero().getAlto() == 10)
+        else if (b.getAlto() == 10)
             jf.setBounds(100, 100, 650, 450);
-        else if (b.getTablero().getAlto() == 12)
+        else if (b.getAlto() == 12)
             jf.setBounds(100, 100, 1050, 600);
 
         JPanel contentPane = new JPanel();
@@ -152,7 +152,7 @@ public class VentanaBuscaminas {
     }
 
     private JButton getCasilla(int pFila, int pColum) {
-        cas = b.getTablero().getCampoJuego();
+        cas = b.getCampoJuego();
 
         if (getMatrizBotones()[pFila][pColum] == null) {
             getMatrizBotones()[pFila][pColum] = new JButton();
@@ -189,7 +189,7 @@ public class VentanaBuscaminas {
     }
     
     private void mostrarCasillasVacias(int pFila, int pCol) {
-        Buscaminas.getBuscaminas().getTablero().descubrirCasilla(cas[pFila][pCol]);
+        Buscaminas.getBuscaminas().descubrirCasilla(cas[pFila][pCol]);
         for (int i=0; i<Buscaminas.getBuscaminas().getAlto(); i++){
         	for (int j=0; j<Buscaminas.getBuscaminas().getAncho(); j++){
         		if (cas[i][j].isDescubierta())
@@ -210,7 +210,7 @@ public class VentanaBuscaminas {
     }
 
     private void mostrarCasillaValor(int pFila, int pCol) {
-        cas = b.getTablero().getCampoJuego();
+        cas = b.getCampoJuego();
         cas[pFila][pCol].descubrirCasilla();
         getCasilla(pFila, pCol).setText(""+((CasillaValor)cas[pFila][pCol]).getValor());
         getCasilla(pFila, pCol).setEnabled(false);
@@ -238,7 +238,7 @@ public class VentanaBuscaminas {
 //    }
 
     private void controlMouse(MouseEvent e, int pFila, int pCol) {
-        cas = b.getTablero().getCampoJuego();
+        cas = b.getCampoJuego();
         if (SwingUtilities.isLeftMouseButton(e)) {
         	if (cas[pFila][pCol].getMarcadaBandera()){}
         	else if (cas[pFila][pCol] instanceof CasillaMina) {

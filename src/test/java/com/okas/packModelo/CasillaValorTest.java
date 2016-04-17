@@ -44,7 +44,7 @@ public class CasillaValorTest {
 		cas2.marcarBandera();
 		assertFalse(cas1.getMarcadaBandera());
 		assertTrue(cas2.getMarcadaBandera());
-		cas2.quitarBandera();
+		cas2.desmarcarBandera();
 		assertFalse(cas2.getMarcadaBandera());
 		
 		//COORDENADA
@@ -54,9 +54,9 @@ public class CasillaValorTest {
 		
 		//VALOR
 		assertTrue(((CasillaValor) cas1).getValor()==1);
-		cas1.incrementarValor();
-		assertTrue(cas1.getValor()==2);
-		assertFalse(cas2.getValor()==2);	
+		((CasillaValor) cas1).incrementarValor();
+		assertTrue(((CasillaValor) cas1).getValor()==2);
+		assertTrue(((CasillaValor) cas2).getValor()==2);
 		
 	}
 

@@ -1,6 +1,7 @@
 package com.okas.packModelo;
 
 import com.okas.packVista.Reloj;
+import com.okas.packVista.VentanaBuscaminas;
 
 public class Buscaminas {
 
@@ -13,16 +14,13 @@ public class Buscaminas {
 
     private Buscaminas(){}
 
-    public int getAlto(){ return getTablero().getAlto(); }
-    public int getAncho(){ return getTablero().getAncho(); }
-    public int getNumMinas(){ return getTablero().getNumMinas(); }
+    public int getAlto(){ return tablero.getAlto(); }
+    public int getAncho(){ return tablero.getAncho(); }
+    public int getNumMinas(){ return tablero.getNumMinas(); }
     public Contador getContador(){
         return contador;
     }
-
-    public Tablero getTablero(){
-        return tablero;
-    }
+    public Casilla[][] getCampoJuego(){ return tablero.getCampoJuego(); }
     
     public int getNivel(){
     	return nivel;
@@ -39,7 +37,7 @@ public class Buscaminas {
      * Reiniciar el tablero de juego
      */
     public void reiniciar() {
-        getTablero().cancelarMinas();
+        tablero.cancelarMinas();
         crearJuego(getNivel());
     }
 
@@ -47,9 +45,22 @@ public class Buscaminas {
      * Genera un nivel dependiendo del parametro
      * @param nivel Nivel que se quiere generar
      */
-    public void crearJuego(int nivel){
+    public Tablero crearJuego(int nivel){
         tablero = Director.getDirector().construirTablero(nivel);
         this.nivel = nivel;
+        return tablero;
+    }
+
+    public void anadirObservadores(VentanaBuscaminas ventanaBuscaminas) {
+        for (Casilla[] casilla : tablero.getCampoJuego()) {
+            for (Casilla casilla1: casilla ){
+                //casilla1.addObserver(ventanaBuscaminas);//TODO Hacerlo en momento de creacion de casillas
+            }
+        }
+    }
+
+    public void descubrirCasilla(Casilla casilla) {
+        tablero.descubrirCasilla(casilla);
     }
 
 }
