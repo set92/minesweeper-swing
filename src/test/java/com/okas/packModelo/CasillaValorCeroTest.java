@@ -12,6 +12,8 @@ public class CasillaValorCeroTest {
 	Coordenada c3;
 	
 	ListaCasillas lista;
+	ListaCasillas lista2;
+	ListaCasillas lista3;
 	
 	Casilla cas1;
 	Casilla cas2;
@@ -24,6 +26,8 @@ public class CasillaValorCeroTest {
 		c3 = new Coordenada(5,8);
 		
 		lista = new ListaCasillas();
+		lista2 = new ListaCasillas();
+		lista3 = new ListaCasillas();
 		
 		cas1 = new CasillaValorCero(c1);
 		cas2 = new CasillaValorCero(c2);
@@ -34,12 +38,22 @@ public class CasillaValorCeroTest {
 	public void test() {
 		lista.getListCasilla().add(cas2);
 		lista.getListCasilla().add(cas3);
-		((CasillaValorCero) cas1).setLista(lista);
+		cas1.setLista(lista);
 		
-		//LISTA DE VECINOS
-		//((CasillaValorCero) cas1).descubrirVecinos();
-		assertTrue(((CasillaValorCero) cas1).getLista()==lista);
-		assertTrue(((CasillaValorCero) cas2).isDescubierta());
+		lista2.getListCasilla().add(cas1);
+		cas2.setLista(lista2);
+		
+		lista3.getListCasilla().add(cas1);
+		cas3.setLista(lista3);
+		
+	
+		assertTrue(cas1.getLista()==lista);
+		assertTrue(!cas2.isDescubierta());
+		assertTrue(!cas1.isDescubierta());
+		cas1.descubrirCasilla();
+		assertTrue(cas1.isDescubierta());
+		assertTrue(cas2.isDescubierta());
+		assertTrue(cas3.isDescubierta());
 	}
 
 }

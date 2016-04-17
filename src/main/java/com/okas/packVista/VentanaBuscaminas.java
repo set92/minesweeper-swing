@@ -102,7 +102,13 @@ public class VentanaBuscaminas {
     private JButton getBtnReiniciar() {
         if (btnReiniciar == null) {
             btnReiniciar = new JButton("Reiniciar");
-            btnReiniciar.addActionListener( e -> Buscaminas.getBuscaminas().reiniciar());
+            btnReiniciar.addActionListener( e -> {
+                VentanaBuscaminas.getVentana().getJf().setVisible(false);
+                Buscaminas.getBuscaminas().reiniciar();
+                ventana = new VentanaBuscaminas();
+                VentanaBuscaminas.getVentana().getJf().setVisible(true);
+            });
+
         }
 
         return btnReiniciar;
@@ -212,24 +218,25 @@ public class VentanaBuscaminas {
         getCasilla(pFila, pCol).setForeground(Color.BLACK);
     }
 
-    private boolean finJuego() {
-        boolean terminado = false;
-        int cont = 0;
-        for (int i = 0; i < b.getAlto(); i++) {
-            for (int j = 0; j < b.getAncho(); j++) {
-                cas = b.getTablero().getCampoJuego();
-                if (!cas[i][j].isDescubierta()) cont++;
-            }
-        }
-        if (cont == Buscaminas.getBuscaminas().getTablero().getNumMinas()) terminado = true;
-        return terminado;
-    }
+//    TODO REHACER METODO, TIENE QUE ESTAR EN EL MODELO, NO LA VISTA
+//    private boolean finJuego() {
+//        boolean terminado = false;
+//        int cont = 0;
+//        for (int i = 0; i < b.getAlto(); i++) {
+//            for (int j = 0; j < b.getAncho(); j++) {
+//                cas = b.getTablero().getCampoJuego();
+//                if (!cas[i][j].isDescubierta()) cont++;
+//            }
+//        }
+//        if (cont == Buscaminas.getBuscaminas().getTablero().getNumMinas()) terminado = true;
+//        return terminado;
+//    }
+//    private void salirJuego() {
+//        jf.setVisible(false);
+//        JOptionPane.showMessageDialog(null, "HAS GANADO");
+//        //MANDAR A RANKING
+//    }
 
-    private void salirJuego() {
-        //jf.setVisible(false); COMENTO PORQUE SI NO SE CIERRA TODO
-        JOptionPane.showMessageDialog(null, "HAS GANADO");
-        //MANDAR A RANKING
-    }
     private void controlMouse(MouseEvent e, int pFila, int pCol) {
         cas = b.getTablero().getCampoJuego();
         if (SwingUtilities.isLeftMouseButton(e)) {
@@ -244,7 +251,7 @@ public class VentanaBuscaminas {
             } else if (cas[pFila][pCol] instanceof CasillaValorCero) {
                 mostrarCasillasVacias(pFila, pCol);
             }
-            if (finJuego()) salirJuego();
+            //if (finJuego()) salirJuego();
         }
         if (SwingUtilities.isRightMouseButton(e)) {
         	if (cas[pFila][pCol].isDescubierta()){}

@@ -27,11 +27,6 @@ public class Buscaminas {
     public int getNivel(){
     	return nivel;
     }
-    
-    public void reiniciar() {
-    	getTablero().cancelarMinas();
-		crearJuego(getNivel());
-    }
 
     public static Buscaminas getBuscaminas(){
     	if (miBuscaminas == null){
@@ -40,6 +35,18 @@ public class Buscaminas {
     	return miBuscaminas;
     }
 
+    /**
+     * Reiniciar el tablero de juego
+     */
+    public void reiniciar() {
+        getTablero().cancelarMinas();
+        crearJuego(getNivel());
+    }
+
+    /**
+     * Genera un nivel dependiendo del parametro
+     * @param nivel Nivel que se quiere generar
+     */
     public void crearJuego(int nivel){
         tablero = Director.getDirector().construirTablero(nivel);
         this.nivel = nivel;

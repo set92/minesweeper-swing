@@ -30,7 +30,7 @@ public class CasillaValorTest {
 
 	@Test
 	public void test() {
-		//DESCUBIR CASILLA
+		//DESCUBRIR CASILLA
 		//MARCAR DESCUBIERTA
 		assertFalse(cas1.isDescubierta());
 		cas1.descubrirCasilla();
@@ -54,12 +54,9 @@ public class CasillaValorTest {
 		
 		//VALOR
 		assertTrue(((CasillaValor) cas1).getValor()==1);
-		((CasillaValor) cas1).incrementarValor();
-		assertTrue(((CasillaValor) cas1).getValor()==2);
-		assertFalse(((CasillaValor) cas2).getValor()==2);
-		
-		
-		
+		cas1.incrementarValor();
+		assertTrue(cas1.getValor()==2);
+		assertFalse(cas2.getValor()==2);	
 		
 	}
 
