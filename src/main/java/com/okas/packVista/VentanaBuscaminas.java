@@ -264,7 +264,7 @@ public class VentanaBuscaminas {
             }
             else if (cas[pFila][pCol].getMarcadaBandera()){
             	quitarBandera(pFila,pCol);
-                cas[pFila][pCol].quitarBandera();
+                cas[pFila][pCol].desmarcarBandera();
                 String numeroString = String.valueOf(cont.getNumero());
                 lblNumMinas.setText("Minas: "+ numeroString);
             }
