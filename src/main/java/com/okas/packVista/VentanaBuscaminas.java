@@ -20,7 +20,7 @@ public class VentanaBuscaminas {
     private JLabel lblNumMinas;
     private JButton btnReiniciar;
     private JLabel lblTiempo;
-
+    private Reloj reloj;
     private Casilla[][] cas;
     private Contador cont = new Contador();
     private static VentanaBuscaminas ventana;
@@ -55,6 +55,9 @@ public class VentanaBuscaminas {
         contentPane.add(getMatrizCampoJuego(), BorderLayout.CENTER);
         jf.setLocationRelativeTo(null);
         jf.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        reloj = new Reloj();
+        reloj.iniciarCronometro();
+        reloj.hide();
     }
 
     private JPanel getBotonesSup() {
@@ -114,8 +117,45 @@ public class VentanaBuscaminas {
         return btnReiniciar;
     }
     private JLabel getLblTiempo() {
-        if (lblTiempo == null) lblTiempo = new JLabel("Tiempo: ");
-
+        if (lblTiempo == null){
+        	lblTiempo = new JLabel("Tiempo: " ); //INTERFAZ DEL RELOJ ( CLICK EN TIEMPO PARA DESPLEGAR )
+        
+        	lblTiempo.addMouseListener(new MouseListener() {
+				
+				@Override
+				public void mouseReleased(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mousePressed(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseExited(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseEntered(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseClicked(MouseEvent arg0) {
+					reloj.show(true);
+					
+				}
+			});
+        }
+        
+        
+        	
         return lblTiempo;
     }
 
@@ -231,11 +271,14 @@ public class VentanaBuscaminas {
 //        if (cont == Buscaminas.getBuscaminas().getTablero().getNumMinas()) terminado = true;
 //        return terminado;
 //    }
+
 //    private void salirJuego() {
-//        jf.setVisible(false);
-//        JOptionPane.showMessageDialog(null, "HAS GANADO");
-//        //MANDAR A RANKING
-//    }
+//       jf.setVisible(false);
+//    reloj.pararCronometro(); METER EL PARAR CRONOMETRO AQUI PARA PODER PARAR EL RELOJ Y RECOGER EL TIEMPO AL FINALIZAR EL JUEGO
+//       JOptionPane.showMessageDialog(null, "HAS GANADO");
+
+       //MANDAR A RANKING
+ // }
 
     private void controlMouse(MouseEvent e, int pFila, int pCol) {
         cas = b.getCampoJuego();
@@ -244,6 +287,7 @@ public class VentanaBuscaminas {
         	else if (cas[pFila][pCol] instanceof CasillaMina) {
                 mostrarMinas();
                 bloquearBotones();
+                reloj.pararCronometro();
                 JOptionPane.showMessageDialog(null, "GAME OVER");
             } else if (cas[pFila][pCol] instanceof CasillaValor) {
                 mostrarCasillaValor(pFila, pCol);
@@ -261,12 +305,15 @@ public class VentanaBuscaminas {
                 cas[pFila][pCol].marcarBandera();
                 String numeroString = String.valueOf(cont.getNumero());
                 lblNumMinas.setText("Minas: "+ numeroString);
+                
             }
             else if (cas[pFila][pCol].getMarcadaBandera()){
             	quitarBandera(pFila,pCol);
-                cas[pFila][pCol].desmarcarBandera();
+                cas[pFila][pCol].quitarBandera();
                 String numeroString = String.valueOf(cont.getNumero());
                 lblNumMinas.setText("Minas: "+ numeroString);
+                cont.update(+1);
+                
             }
         	
         	
@@ -279,8 +326,9 @@ public class VentanaBuscaminas {
     }
     
     private void quitarBandera(int pFila, int pCol){
-    	getCasilla(pFila, pCol).setText("");
 
+    	getCasilla(pFila, pCol).setText("");
+    
     }
 }
 
