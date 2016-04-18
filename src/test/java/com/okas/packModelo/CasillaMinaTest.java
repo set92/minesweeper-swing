@@ -42,7 +42,7 @@ public class CasillaMinaTest {
 		cas2.marcarBandera();
 		assertFalse(cas1.getMarcadaBandera());
 		assertTrue(cas2.getMarcadaBandera());
-		cas2.quitarBandera();
+		cas2.desmarcarBandera();
 		assertFalse(cas2.getMarcadaBandera());
 
 		// COORDENADA

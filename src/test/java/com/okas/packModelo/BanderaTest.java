@@ -41,8 +41,7 @@ public class BanderaTest {
 
 	@Test
 	public void testMarcarBandera() {
-		Buscaminas.getBuscaminas().crearJuego(1);
-		Tablero tb = Buscaminas.getBuscaminas().crearJuego(1);
+		Tablero tb = new Tablero(7,10);
 		tb.colocarCasilla(c1, cas1);
 		tb.colocarCasilla(c2, cas2);
 		tb.colocarCasilla(c3, cas3);
@@ -53,6 +52,8 @@ public class BanderaTest {
 		tb.colocarCasilla(c8, cas8);
 		tb.colocarCasilla(c9, cas9);
 		tb.colocarCasilla(c10, cas10);
+		
+		tb.imprimirCampo();
 		
 	//CASILLA CON VALOR	
 		//Marcar bandera
