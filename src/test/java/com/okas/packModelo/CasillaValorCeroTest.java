@@ -38,16 +38,16 @@ public class CasillaValorCeroTest {
 	public void test() {
 		lista.getListCasilla().add(cas2);
 		lista.getListCasilla().add(cas3);
-		cas1.setLista(lista);
+		((CasillaValorCero)cas1).setLista(lista);
 		
 		lista2.getListCasilla().add(cas1);
-		cas2.setLista(lista2);
+		((CasillaValorCero)cas2).setLista(lista2);
 		
 		lista3.getListCasilla().add(cas1);
-		cas3.setLista(lista3);
+		((CasillaValorCero)cas3).setLista(lista3);
 		
 	
-		assertTrue(cas1.getLista()==lista);
+		assertTrue(((CasillaValorCero)cas1).getLista()==lista);
 		assertTrue(!cas2.isDescubierta());
 		assertTrue(!cas1.isDescubierta());
 		cas1.descubrirCasilla();
