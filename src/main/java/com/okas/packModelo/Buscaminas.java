@@ -62,8 +62,5 @@ public class Buscaminas {
     public void descubrirCasilla(Casilla casilla) {
         tablero.descubrirCasilla(casilla);
     }
-    public Tablero getTablero(){
-        return tablero;
-    }
 
 }

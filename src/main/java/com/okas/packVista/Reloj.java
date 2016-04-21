@@ -79,7 +79,7 @@ public class Reloj extends JFrame implements Runnable
             }
         }catch(Exception e){}
         //Cuando se reincie se coloca nuevamente en 00:00:000
-        tiempo.setText( min + ":" + seg + ":" + mil );
+        tiempo.setText( "00:00:000" );
     }
 
     

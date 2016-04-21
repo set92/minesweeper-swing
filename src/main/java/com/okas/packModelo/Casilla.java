@@ -48,8 +48,4 @@ public abstract class Casilla extends PonerBanderasObservable {
     public boolean getMarcadaBandera() {
         return marcadaBandera;
     }
-    public void quitarBandera() {
-        this.marcadaBandera = false;
-    }
-
 }

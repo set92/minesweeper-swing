@@ -5,9 +5,7 @@ public class Contador implements IObserver{
 
 	public void update(int n){ //Depende del numero que entre (1 ó -1) suma o resta
 		
-		//this.getNumero();
 		numero = numero + n;
-		System.out.println(numero);
 	}
 	
 	public int getNumero() {
