@@ -11,6 +11,7 @@ public class Buscaminas {
    // private int puntuacion;
     private Reloj reloj;
     private static Buscaminas miBuscaminas = null;
+    private TableroBuilder tableroBuilder;
 
     private Buscaminas(){}
 
@@ -24,7 +25,11 @@ public class Buscaminas {
     	contador = contador + n;
     }
     public Casilla[][] getCampoJuego(){ return tablero.getCampoJuego(); }
-    
+
+    public void setTableroBuilder(TableroBuilder tabBuilder){
+        tableroBuilder = tabBuilder;
+    }
+
     public int getNivel(){
     	return nivel;
     }
@@ -49,10 +54,17 @@ public class Buscaminas {
      * @param nivel Nivel que se quiere generar
      */
     public Tablero crearJuego(int nivel){
-        tablero = Director.getDirector().construirTablero(nivel);
-        this.nivel = nivel;
-        contador = tablero.getNumMinas();
-        return tablero;
+        switch (nivel){
+            case 1: tableroBuilder = new BuilderN1();break;
+            case 2: tableroBuilder = new BuilderN2();break;
+            case 3: tableroBuilder = new BuilderN3();break;
+            default: tableroBuilder = new BuilderN1();break;
+        }
+
+        tableroBuilder.construirTablero();
+        this.setTableroBuilder(tableroBuilder);
+
+        return tableroBuilder.getTablero();
     }
     
     /**
