@@ -29,7 +29,7 @@ public class VentanaLogin extends JFrame {
 	public static VentanaLogin getVentana(){
 		if(ventana==null){
             try {
-                UIManager.setLookAndFeel("com.jtattoo.plaf.luna.LunaLookAndFeel");
+              //  UIManager.setLookAndFeel("com.jtattoo.plaf.luna.LunaLookAndFeel");
             } catch (Exception e) {
                 e.printStackTrace();
             }

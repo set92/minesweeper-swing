@@ -11,12 +11,17 @@ public class CasillaValorCero extends Casilla {
 		super(pCord);
 	}
 	
+	/**
+     * Descubre la casilla de valor cero
+     */
 	@Override
 	public void descubrirCasilla(){
 		if (!marcadaBandera) {
 			if (!descubierta) {
 				marcarDescubierta();
 				descubrirVecinos();
+				this.setChanged();
+	        	this.notifyObservers("descubrirCasilla");
 			}
 		}
 	}
@@ -28,6 +33,9 @@ public class CasillaValorCero extends Casilla {
 		lista = pLista;
 	}
 
+	/**
+     * Descubre las casillas de alrededor de la casilla de valor cero
+     */
 	private void descubrirVecinos() {
 		lista.expandirVecinos();
 		

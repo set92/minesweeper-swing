@@ -1,8 +1,9 @@
 package com.okas.packModelo;
 
+import java.util.Observable;
 import java.util.Observer;
 
-public abstract class Casilla extends PonerBanderasObservable {
+public abstract class Casilla extends Observable {
     protected Coordenada pos;
     protected boolean marcadaBandera;
     protected boolean descubierta;
@@ -12,40 +13,75 @@ public abstract class Casilla extends PonerBanderasObservable {
     	this.descubierta = false;
     	this.marcadaBandera = false;
     }
+    
+    /**
+     * Descubre la casilla
+     */
 
     public void descubrirCasilla(){
-    	if (!descubierta && !marcadaBandera) marcarDescubierta();
+    	if (!descubierta && !marcadaBandera){
+    		marcarDescubierta();
+    		this.setChanged();
+        	this.notifyObservers("descubrirCasilla");
+    	}
     }
 
     public Coordenada getCoordenada(){return this.pos;}
     
+    
+    /**
+     * Poner una bandera en la casilla
+     */
     public void marcarBandera(){
-    	if (!descubierta){
+    	if (!descubierta) {
     		if (!marcadaBandera){
     			this.marcadaBandera = true;	
-    			this.notificar(-1);
+    	    	this.setChanged();
+    	    	this.notifyObservers("marcarBandera");
     		}
     	}
+    	
     }
+    
+    /**
+     * Quita la bandera de la casilla
+     */
 
     public void desmarcarBandera(){
-    	if (!descubierta){
+    	if (!descubierta) {
     		if (marcadaBandera){
-    			this.marcadaBandera = false;	
-    			this.notificar(1);
+    			desmarcarVacia();	
+    	    	this.setChanged();
+    	    	this.notifyObservers("desmarcarBandera");
     		}
     	}
     }
     
+    
+    /**
+     * Quita la bandera
+     */
+   
     public void desmarcarVacia(){this.marcadaBandera = false;}
     
+    
+    /**
+     * Descubre la casilla
+     */
+    
     public void marcarDescubierta(){this.descubierta = true;}
+    
+    
+    /**
+     * Nos dice si la casilla está descubierta o no
+     */
+    public boolean isDescubierta(){
+    	return descubierta;
+    }
+    
 
-    public boolean isDescubierta() {
-        return descubierta;
+    public boolean getMarcadaBandera(){
+    	return marcadaBandera;
     }
 
-    public boolean getMarcadaBandera() {
-        return marcadaBandera;
-    }
 }

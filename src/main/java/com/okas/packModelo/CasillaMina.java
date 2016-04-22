@@ -6,12 +6,15 @@ public class CasillaMina extends Casilla {
 		super(pPos);
 	}
 	
+	/**
+     * Descubre la casilla Mina
+     */
     @Override
     public void descubrirCasilla() {
     	if(!marcadaBandera) {
-    		System.out.println("casillaBomba");
     		marcarDescubierta();
-    		System.out.println("se ha acabado el juego");
+    		this.setChanged();
+        	this.notifyObservers("descubrirCasilla");
     	}
     
     }

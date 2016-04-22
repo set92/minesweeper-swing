@@ -9,6 +9,9 @@ public class CasillaValor extends Casilla {
     	this.valor = 1;
     }
 
+    /**
+     * Incrementa en 1 el valor de la Casilla
+     */
     public void incrementarValor(){ this.valor++;}
 
 	public int getValor() {

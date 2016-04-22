@@ -10,6 +10,9 @@ public class Tablero {
 	private Casilla[][] campoJuego;
     private static boolean minasPuestas = false;//Flag para ver si estan puestas las minas
 
+    /**
+     * Para reiniciar el tablero, ponemos a false el chivato de las minas
+     */
 	public void cancelarMinas() {
 		minasPuestas = false;
 	}
@@ -36,6 +39,11 @@ public class Tablero {
 		return campoJuego;
 	}
 
+	/**
+     * Colocamos la casilla que nos trae como parámetro en le coordenada que nos trae como parámetro
+     * @param pCoor Coordenada donde queremos meter la casilla
+     * @pCasilla Casilla que queremos colocar
+     */
 	public void colocarCasilla(Coordenada pCoord, Casilla pCasilla) {
 		if (this.coordenadaValida(pCoord))
 		{
@@ -44,6 +52,10 @@ public class Tablero {
 			campoJuego[i][j] = pCasilla;
 		}
 	}
+	/**
+     * Saber si la coordenada que nos pasa como parámetros es válida o no
+     * @param pCoord Coordenada que queremos comprobar
+     */
 	public boolean coordenadaValida(Coordenada pCoord){
 		boolean valid = false;
 		if (pCoord.getAlto() >= 0 && pCoord.getAncho() >= 0){
@@ -54,11 +66,19 @@ public class Tablero {
 		return valid;
 	}	
 
+	/**
+     * Descubrir la casilla que nos trae como parámetro
+     * @param cas Casilla que queremos descubrir
+     */
 	public void descubrirCasilla(Casilla cas) {
 		if (this.esValida(cas))
 			cas.descubrirCasilla();
 	}
 	
+	/**
+     * Saber si la casilla que nos trae como parámetro es válida o no
+     * @param cas Casilla que queremos comprobar
+     */
 	public boolean esValida (Casilla cas){
 		boolean valida = false;
 		if (cas.getCoordenada().getAlto() >= 0 && cas.getCoordenada().getAncho() >= 0){
@@ -69,16 +89,27 @@ public class Tablero {
 		return valida;
 	}
 	
+	/**
+     * Poner bandera en la casilla que nos trae como parámetros
+     * @param cas Casilla que queremos modificar
+     */
 	public void marcarBandera(Casilla cas){
 		if (this.esValida(cas))
 			cas.marcarBandera();
 	}
 	
+	/**
+     * Quitar bandera en la casilla que nos trae como parámetros
+     * @param cas Casilla que queremos modificar
+     */
 	public void desmarcarBandera(Casilla cas){
 		if (this.esValida(cas))
 			cas.desmarcarBandera();
 	}
 
+	/**
+     * Crea la lista de las Casillas de alrededor de las casillas de valor cero
+     */
 	public void crearListas() {
 		Casilla cas;
 		ListaCasillas lista;
@@ -93,6 +124,10 @@ public class Tablero {
 		}
 	}
 
+	/**
+     * Coge los vecinos de la casilla que nos dan como parámetro
+     * @param casilla Casilla a la que queremos añadir la listaCasillas
+     */
 	private ListaCasillas cogerVecinos(Casilla casilla) {
 		ListaCasillas lista = new ListaCasillas();
 		int aalto = casilla.getCoordenada().getAlto();
@@ -108,6 +143,9 @@ public class Tablero {
 		return lista;
 	}
 
+	/**
+     * Rellena con CasillaValorCero las casillas que no se han rellenado aún
+     */
 	public void rellenarCasillasRestantes() {
 		for (int i = 0; i < alto; i++) {
 			for (int j = 0; j < ancho; j++) {
@@ -124,6 +162,10 @@ public class Tablero {
 		this.imprimirCampo();
 	}
 
+	/**
+     * Rellenamos el tablero con el numero de minas que nos dan como parámetro
+     * @param pMinas Numero de minas
+     */
 	public void ponerCasillasBomba(int pMinas) {
 		numMinas=pMinas; 
 		int contador = numMinas;
@@ -148,28 +190,36 @@ public class Tablero {
             minasPuestas = true;
         }
 	}
-
+	
+	/**
+     * Incrementa en 1 las casillas de alrededor de la casilla con la coordenada que nos dan como parámetro
+     * @param coordenadaAct Para saber que hay que incrementar las casillas de las coordenadas de alrededor
+     */
 	private void incrementarAlrededores(Coordenada coordenadaAct) {
-		int aalto = coordenadaAct.getAlto();
-		int aancho = coordenadaAct.getAncho();
-		for (int i = aalto - 1; i <= aalto + 1; i++) {
-			for (int j = aancho - 1; j <= aancho + 1; j++) {
+		int altoMina = coordenadaAct.getAlto();
+		int anchoMina = coordenadaAct.getAncho();
+		for (int i = altoMina - 1; i <= altoMina + 1; i++) {
+			for (int j = anchoMina - 1; j <= anchoMina + 1; j++) {
 				if ((j >= 0) && (j < ancho) && (i >= 0) && (i < alto)) {
 					Casilla casillaActual = campoJuego[i][j];
 					if (casillaActual != null) {
 						if (casillaActual instanceof CasillaValor) {
 							((CasillaValor) casillaActual).incrementarValor();
 						} else if (casillaActual instanceof CasillaValorCero) {
-							campoJuego[i][j] = new CasillaValor(coordenadaAct);
+							campoJuego[i][j] = new CasillaValor(casillaActual.getCoordenada());
 						}
 					} else if (casillaActual == null) {
-						campoJuego[i][j] = new CasillaValor(coordenadaAct);
+						Coordenada coor = new Coordenada(i,j);
+						campoJuego[i][j] = new CasillaValor(coor);
 					}
 				}
 			}
 		}
 	}
 
+	/**
+     * Imprime por pantalla el tablero
+     */
 	public void imprimirCampo() {
 		String res = "";
 		for (int s = 0; s < alto; s++) {

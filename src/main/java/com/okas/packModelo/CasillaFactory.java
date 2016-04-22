@@ -10,6 +10,12 @@ public class CasillaFactory {
 		if (miCasillaFactory == null) miCasillaFactory = new CasillaFactory();
 		return miCasillaFactory;
 	}
+	
+	/**
+     * Crea la casilla del tipo y coordenadsa que se le pasan como parámetro
+     * @param pTipoCasilla Tipo de la casilla que queremos crear
+     * @param pCoor Coordenada de la casilla que queremos crear
+     */
 
 	public Casilla createCasilla (String pTipoCasilla, Coordenada pCoord){
 		Casilla miCasilla = null;
