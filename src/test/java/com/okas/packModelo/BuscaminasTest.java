@@ -5,11 +5,12 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-public class BanderaTest {
-	
+public class BuscaminasTest {
+
 	Coordenada c1, c2, c3,c4,c5,c6,c7,c8,c9,c10;
 	Tablero tb;
 	Casilla cas1, cas2,cas3,cas4,cas5,cas6,cas7,cas8,cas9,cas10;
+	Buscaminas bsc;
 
 
 	@Before
@@ -43,6 +44,7 @@ public class BanderaTest {
 		cas10 = new CasillaValor(c10);
 		
 		tb = new Tablero(7,10);
+		bsc = Buscaminas.getBuscaminas();
 	}
 
 	@Test
@@ -58,85 +60,86 @@ public class BanderaTest {
 		tb.colocarCasilla(c9, cas9);
 		tb.colocarCasilla(c10, cas10);
 		tb.imprimirCampo();
+		bsc.setTablero(tb);
 		
 	//CASILLA CON VALOR	
 		//Marcar bandera
-		assertFalse(tb.isMarcadaBandera(1,3));
-		tb.marcarBandera(1,3);
-		assertTrue(tb.isMarcadaBandera(1,3));
+		assertFalse(bsc.isMarcadaBandera(1,3));
+		bsc.marcarBandera(1,3);
+		assertTrue(bsc.isMarcadaBandera(1,3));
 		
 		//Desmarcar bandera
-		assertFalse(tb.isMarcadaBandera(5,8));
-		tb.marcarBandera(5,8);
-		assertTrue(tb.isMarcadaBandera(5,8));
-		tb.desmarcarBandera(5,8);
-		assertFalse(tb.isMarcadaBandera(5,8));
+		assertFalse(bsc.isMarcadaBandera(5,8));
+		bsc.marcarBandera(5,8);
+		assertTrue(bsc.isMarcadaBandera(5,8));
+		bsc.desmarcarBandera(5,8);
+		assertFalse(bsc.isMarcadaBandera(5,8));
 		
 		//descubrir casilla con bandera
-		tb.descubrirCasilla(1,3);
-		assertTrue(tb.isMarcadaBandera(1,3));
-		assertFalse(tb.isDescubierta(1,3));
+		bsc.descubrirCasilla(1,3);
+		assertTrue(bsc.isMarcadaBandera(1,3));
+		assertFalse(bsc.isDescubierta(1,3));
 		
 		//Marcar bandera en casilla descubierta
 		
-		tb.descubrirCasilla(2,5);
-		assertTrue(tb.isDescubierta(2,5));
-		tb.marcarBandera(2,5);
-		assertTrue(tb.isDescubierta(2,5));
-		assertFalse(tb.isMarcadaBandera(2,5));
+		bsc.descubrirCasilla(2,5);
+		assertTrue(bsc.isDescubierta(2,5));
+		bsc.marcarBandera(2,5);
+		assertTrue(bsc.isDescubierta(2,5));
+		assertFalse(bsc.isMarcadaBandera(2,5));
 		
 //CASILLA SIN VALOR	
 		//Marcar bandera
-		assertFalse(tb.isMarcadaBandera(0,0));
-		tb.marcarBandera(0,0);
-		assertTrue(tb.isMarcadaBandera(0,0));
+		assertFalse(bsc.isMarcadaBandera(0,0));
+		bsc.marcarBandera(0,0);
+		assertTrue(bsc.isMarcadaBandera(0,0));
 				
 		//Desmarcar bandera
-		assertFalse(tb.isMarcadaBandera(5,3));
-		tb.marcarBandera(5,3);
-		assertTrue(tb.isMarcadaBandera(5,3));
-		tb.desmarcarBandera(5,3);
-		assertFalse(tb.isMarcadaBandera(5,3));
+		assertFalse(bsc.isMarcadaBandera(5,3));
+		bsc.marcarBandera(5,3);
+		assertTrue(bsc.isMarcadaBandera(5,3));
+		bsc.desmarcarBandera(5,3);
+		assertFalse(bsc.isMarcadaBandera(5,3));
 				
 		//descubrir casilla con bandera
-		tb.marcarBandera(0, 0);
-		assertTrue(tb.isMarcadaBandera(0,0));
-		assertFalse(tb.isDescubierta(0, 0));
+		bsc.marcarBandera(0, 0);
+		assertTrue(bsc.isMarcadaBandera(0,0));
+		assertFalse(bsc.isDescubierta(0, 0));
 				
 		//Marcar bandera en casilla descubierta
 			
-		tb.descubrirCasilla(2, 1);
-		assertTrue(tb.isDescubierta(2,1));
-		tb.marcarBandera(2,1);
-		assertTrue(tb.isDescubierta(2,1));
-		assertFalse(tb.isMarcadaBandera(2, 1));
+		bsc.descubrirCasilla(2, 1);
+		assertTrue(bsc.isDescubierta(2,1));
+		bsc.marcarBandera(2,1);
+		assertTrue(bsc.isDescubierta(2,1));
+		assertFalse(bsc.isMarcadaBandera(2, 1));
 				
 				
 //CASILLA MINA	
 		//Marcar bandera
-		assertFalse(tb.isMarcadaBandera(1, 0));
-		tb.marcarBandera(1,0);
-		assertTrue(tb.isMarcadaBandera(1, 0));
+		assertFalse(bsc.isMarcadaBandera(1, 0));
+		bsc.marcarBandera(1,0);
+		assertTrue(bsc.isMarcadaBandera(1, 0));
 				
 		//Desmarcar bandera
-		assertFalse(tb.isMarcadaBandera(2, 4));
-		tb.marcarBandera(2, 4);
-		assertTrue(tb.isMarcadaBandera(2, 4));
-		tb.desmarcarBandera(2,4);
-		assertFalse(tb.isMarcadaBandera(2, 4));
+		assertFalse(bsc.isMarcadaBandera(2, 4));
+		bsc.marcarBandera(2, 4);
+		assertTrue(bsc.isMarcadaBandera(2, 4));
+		bsc.desmarcarBandera(2,4);
+		assertFalse(bsc.isMarcadaBandera(2, 4));
 				
 		//descubrir casilla con bandera
-		tb.descubrirCasilla(1,0);
-		assertTrue(tb.isMarcadaBandera(1, 0));
-		assertFalse(tb.isDescubierta(1,0));
+		bsc.descubrirCasilla(1,0);
+		assertTrue(bsc.isMarcadaBandera(1, 0));
+		assertFalse(bsc.isDescubierta(1,0));
 				
 		//Marcar bandera en casilla descubierta
 				
-		tb.descubrirCasilla(0,5);
-		assertTrue(tb.isDescubierta(0,5));
-		tb.marcarBandera(0,5);
-		assertTrue(tb.isDescubierta(0,5));
-		assertFalse(tb.isMarcadaBandera(0, 5));
+		bsc.descubrirCasilla(0,5);
+		assertTrue(bsc.isDescubierta(0,5));
+		bsc.marcarBandera(0,5);
+		assertTrue(bsc.isDescubierta(0,5));
+		assertFalse(bsc.isMarcadaBandera(0, 5));
 	}
 
 }

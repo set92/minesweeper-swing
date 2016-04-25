@@ -110,4 +110,6 @@ public class Buscaminas {
     public boolean isDescubierta(int pFila, int pColumna){
     	return tablero.isDescubierta(pFila,pColumna);
     }
+    
+    public void setTablero(Tablero tb){this.tablero=tb;} //para jUnits
 }
