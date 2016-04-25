@@ -22,7 +22,7 @@ public abstract class Casilla extends Observable {
     	if (!descubierta && !marcadaBandera){
     		marcarDescubierta();
     		this.setChanged();
-        	this.notifyObservers("descubrirCasilla");
+        	this.notifyObservers("descubrirCasilla,"+pos.getAlto()+","+pos.getAncho());
     	}
     }
 
@@ -37,7 +37,7 @@ public abstract class Casilla extends Observable {
     		if (!marcadaBandera){
     			this.marcadaBandera = true;	
     	    	this.setChanged();
-    	    	this.notifyObservers("marcarBandera");
+    	    	this.notifyObservers("marcarBandera,"+pos.getAlto()+","+pos.getAncho());
     		}
     	}
     	
@@ -52,7 +52,7 @@ public abstract class Casilla extends Observable {
     		if (marcadaBandera){
     			desmarcarVacia();	
     	    	this.setChanged();
-    	    	this.notifyObservers("desmarcarBandera");
+    	    	this.notifyObservers("desmarcarBandera,"+pos.getAlto()+","+pos.getAncho());
     		}
     	}
     }

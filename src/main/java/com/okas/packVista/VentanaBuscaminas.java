@@ -108,7 +108,7 @@ public class VentanaBuscaminas implements Observer {
 				ventana = new VentanaBuscaminas();
 				VentanaBuscaminas.getVentana().getJf().setVisible(true);
 			});
-			ImageIcon icono = new ImageIcon("Sergio_Tobal.png");
+			ImageIcon icono = new ImageIcon("src/main/resources/Sergio_Tobal.png");
 			btnReiniciar.setIcon(icono);
 		}
 
@@ -172,7 +172,7 @@ public class VentanaBuscaminas implements Observer {
 		for (int i = 0; i < b.getAlto(); i++){
 			for (int j = 0; j < b.getAncho(); j++){
 				if (b.getCampoJuego()[i][j] instanceof CasillaMina) {
-					ImageIcon bomba = new ImageIcon("ImagenBomba.png");
+					ImageIcon bomba = new ImageIcon("src/main/resources/ImagenBomba.png");
 					devolverCasilla(i, j).setIcon(bomba);
 					devolverCasilla(i, j).setEnabled(false);
 				}
@@ -223,21 +223,27 @@ public class VentanaBuscaminas implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {	
+		String cadena = (String) arg;
+		String[] sp = cadena.split(",");
+		String accion = sp[0];
+		String alto = sp[1];
+		String ancho = sp[2];
 
-		int x = ((Casilla) o).getCoordenada().getAlto();
-		int y = ((Casilla) o).getCoordenada().getAncho();
+		int x = Integer.parseInt(alto);
+		int y = Integer.parseInt(ancho);
 
-		if (arg.equals("marcarBandera")){
-			ImageIcon bandera = new ImageIcon("ImagenBandera.png");
-			matrizBotones[x][y].setIcon(bandera);
+		if (accion.equals("marcarBandera")){
+			ImageIcon bandera = new ImageIcon("src/main/resources/ImagenBandera.png");
+			devolverCasilla(x, y).setIcon(bandera);
 			lblNumMinas.setText("Minas: "+b.getContador());
 		}
-		else if (arg.equals("desmarcarBandera")){
-			matrizBotones[x][y].setIcon(new ImageIcon());
+		else if (accion.equals("desmarcarBandera")){
+			devolverCasilla(x, y).setIcon(null);
 			lblNumMinas.setText("Minas: "+b.getContador());
 		}
-		else if (arg.equals("descubrirCasilla")){
+		else if (accion.equals("descubrirCasilla")){
 			if(o instanceof CasillaValor){
+				System.out.println("valor");
 				devolverCasilla(x, y).setText(""+((CasillaValor)o).getValor());
 				devolverCasilla(x, y).setEnabled(false);
 				devolverCasilla(x, y).setBackground(Color.WHITE);
@@ -245,13 +251,15 @@ public class VentanaBuscaminas implements Observer {
 
 			}
 			else if(o instanceof CasillaMina){
-				ImageIcon icono2 = new ImageIcon("tobal.png");
+				System.out.println("mina");
+				ImageIcon icono2 = new ImageIcon("src/main/resources/tobal.png");
 				btnReiniciar.setIcon(icono2);
 				mostrarMinas();
 				bloquearBotones();
 				JOptionPane.showMessageDialog(null, "GAME OVER");
 			}
 			else if(o instanceof CasillaValorCero){
+				System.out.println("cero");
 				devolverCasilla(x, y).setEnabled(false);
 				devolverCasilla(x, y).setBackground(Color.WHITE);
 				devolverCasilla(x, y).setForeground(Color.BLACK);
@@ -260,5 +268,3 @@ public class VentanaBuscaminas implements Observer {
 		}
 	}
 }
-
-

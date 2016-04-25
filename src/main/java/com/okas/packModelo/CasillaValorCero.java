@@ -21,7 +21,7 @@ public class CasillaValorCero extends Casilla {
 				marcarDescubierta();
 				descubrirVecinos();
 				this.setChanged();
-	        	this.notifyObservers("descubrirCasilla");
+	        	this.notifyObservers("descubrirCasilla,"+pos.getAlto()+","+pos.getAncho());
 			}
 		}
 	}
