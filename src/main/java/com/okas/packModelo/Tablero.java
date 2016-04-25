@@ -70,19 +70,19 @@ public class Tablero {
      * Descubrir la casilla que nos trae como parámetro
      * @param cas Casilla que queremos descubrir
      */
-	public void descubrirCasilla(Casilla cas) {
-		if (this.esValida(cas))
-			cas.descubrirCasilla();
+	public void descubrirCasilla(int pFila, int pColumna) {
+		if (this.esValida(pFila, pColumna))
+			campoJuego[pFila][pColumna].descubrirCasilla();
 	}
 	
 	/**
      * Saber si la casilla que nos trae como parámetro es válida o no
      * @param cas Casilla que queremos comprobar
      */
-	public boolean esValida (Casilla cas){
+	public boolean esValida (int pFila,int pColumna){
 		boolean valida = false;
-		if (cas.getCoordenada().getAlto() >= 0 && cas.getCoordenada().getAncho() >= 0){
-			if (cas.getCoordenada().getAlto() <= this.alto && cas.getCoordenada().getAncho() <= this.ancho){
+		if (pFila >= 0 && pColumna >= 0){
+			if (pFila <= this.alto && pColumna <= this.ancho){
 				valida = true;
 			}
 		}
@@ -93,18 +93,18 @@ public class Tablero {
      * Poner bandera en la casilla que nos trae como parámetros
      * @param cas Casilla que queremos modificar
      */
-	public void marcarBandera(Casilla cas){
-		if (this.esValida(cas))
-			cas.marcarBandera();
+	public void marcarBandera(int pFila, int pColumna){
+		if (this.esValida(pFila,pColumna))
+			campoJuego[pFila][pColumna].marcarBandera();
 	}
 	
 	/**
      * Quitar bandera en la casilla que nos trae como parámetros
      * @param cas Casilla que queremos modificar
      */
-	public void desmarcarBandera(Casilla cas){
-		if (this.esValida(cas))
-			cas.desmarcarBandera();
+	public void desmarcarBandera(int pFila, int pColumna){
+		if (this.esValida(pFila,pColumna))
+			campoJuego[pFila][pColumna].desmarcarBandera();
 	}
 
 	/**
@@ -181,7 +181,8 @@ public class Tablero {
                 Casilla unaCasilla = campoJuego[numeroAleatorio][numeroAleatorio2];
                 if (!(unaCasilla instanceof CasillaMina)) {
                     Coordenada nuevaPos = new Coordenada(numeroAleatorio, numeroAleatorio2);
-                    CasillaMina nuevaMina = new CasillaMina(nuevaPos);
+                    Casilla nuevaMina = CasillaFactory.getCasillaFactory().createCasilla("Cero",
+							nuevaPos);
                     campoJuego[numeroAleatorio][numeroAleatorio2] = nuevaMina;
                     incrementarAlrededores(nuevaMina.pos);
                     contador--;
@@ -206,7 +207,7 @@ public class Tablero {
 						if (casillaActual instanceof CasillaValor) {
 							((CasillaValor) casillaActual).incrementarValor();
 						} else if (casillaActual instanceof CasillaValorCero) {
-							campoJuego[i][j] = new CasillaValor(casillaActual.getCoordenada());
+							campoJuego[i][j] = CasillaFactory.getCasillaFactory().createCasilla("valor", casillaActual.getCoordenada());
 						}
 					} else if (casillaActual == null) {
 						Coordenada coor = new Coordenada(i,j);
@@ -236,5 +237,13 @@ public class Tablero {
 			res += "\n";
 		}
 		System.out.println(res);
+	}
+
+	public boolean isMarcadaBandera(int pFila, int pColumna) {
+		return campoJuego[pFila][pColumna].getMarcadaBandera();
+	}
+
+	public boolean isDescubierta(int pFila, int pColumna) {
+		return campoJuego[pFila][pColumna].isDescubierta();
 	}
 }

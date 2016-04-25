@@ -61,9 +61,10 @@ public class Buscaminas {
             default: tableroBuilder = new BuilderN1();break;
         }
 
-        tableroBuilder.construirTablero();
-        this.setTableroBuilder(tableroBuilder);
-
+        tablero = tableroBuilder.construirTablero();
+        contador = tablero.getNumMinas();
+        setTableroBuilder(tableroBuilder);
+        
         return tableroBuilder.getTablero();
     }
     
@@ -81,13 +82,34 @@ public class Buscaminas {
     }
    
     
+   
     /**
      * Descubre la casilla que le proporciona el parametro
-     * @param casilla Casilla qe se quieres descubrir
+     * @param pFila Fila en la que está la casilla
+     * @param pColumna Columna en la que está la casilla
      */
-
-    public void descubrirCasilla(Casilla casilla) {
-        tablero.descubrirCasilla(casilla);
+    public void descubrirCasilla(int pFila, int pColumna) {
+        tablero.descubrirCasilla(pFila,pColumna);
+    }
+    
+    /**
+     * Marca bandera en las coordenadas que te dan por parámetro
+     * @param pFila Fila en la que está la casilla
+     * @param pColumna Columna en la que está la casilla
+     */
+    public void marcarBandera(int pFila, int pColumna){
+    	tablero.marcarBandera(pFila, pColumna);
+    }
+    
+    public void desmarcarBandera(int pFila, int pColumna){
+    	tablero.desmarcarBandera(pFila, pColumna);
     }
 
+    public boolean isMarcadaBandera(int pFila, int pColumna){
+    	return tablero.isMarcadaBandera(pFila,pColumna);
+    }
+    
+    public boolean isDescubierta(int pFila, int pColumna){
+    	return tablero.isDescubierta(pFila,pColumna);
+    }
 }

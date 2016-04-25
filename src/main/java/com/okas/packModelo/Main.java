@@ -12,5 +12,5 @@ public class Main {
         //Buscaminas.getBuscaminas().crearJuego(1);
         //VentanaBuscaminas.getVentana().getJf().setVisible(true);
 	}
-
+	
 }

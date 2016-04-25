@@ -23,7 +23,7 @@ public class VentanaBuscaminas implements Observer {
 	private JButton btnReiniciar;
 	private JLabel lblTiempo;
 
-	private Casilla[][] cas;
+
 	private static VentanaBuscaminas ventana;
 	private Buscaminas b = Buscaminas.getBuscaminas();//Lo pongo aqui para solo ponerlo 1 vez (variable local)
 
@@ -97,7 +97,6 @@ public class VentanaBuscaminas implements Observer {
 
 	private JLabel getLblNumMinas() {
 		if (lblNumMinas == null) lblNumMinas = new JLabel("Minas: "+b.getContador());
-
 		return lblNumMinas;
 	}
 	private JButton getBtnReiniciar() {
@@ -109,16 +108,14 @@ public class VentanaBuscaminas implements Observer {
 				ventana = new VentanaBuscaminas();
 				VentanaBuscaminas.getVentana().getJf().setVisible(true);
 			});
-			ImageIcon icono = new ImageIcon("C:/Users/Olatz/Desktop/BUSCAMINAS_IS/source/src/main/java/com/okas/packVista/Sergio_Tobal.png");
+			ImageIcon icono = new ImageIcon("Sergio_Tobal.png");
 			btnReiniciar.setIcon(icono);
-
 		}
 
 		return btnReiniciar;
 	}
 	private JLabel getLblTiempo() {
 		if (lblTiempo == null) lblTiempo = new JLabel("Tiempo: ");
-
 		return lblTiempo;
 	}
 
@@ -163,7 +160,7 @@ public class VentanaBuscaminas implements Observer {
 	private void bloquearBotones() {
 		for (int i = 0; i < b.getAlto(); i++){
 			for (int j = 0; j < b.getAncho(); j++){
-				if (!(cas[i][j] instanceof CasillaMina)) {
+				if (!(b.getCampoJuego()[i][j] instanceof CasillaMina)) {
 					devolverCasilla(i, j).setEnabled(false);
 					matrizBotones[i][j] = new Boton(i,j);
 				}
@@ -174,8 +171,8 @@ public class VentanaBuscaminas implements Observer {
 	private void mostrarMinas() {
 		for (int i = 0; i < b.getAlto(); i++){
 			for (int j = 0; j < b.getAncho(); j++){
-				if (cas[i][j] instanceof CasillaMina) {
-					ImageIcon bomba = new ImageIcon("C:/Users/Olatz/Desktop/BUSCAMINAS_IS/source/src/main/java/com/okas/packVista/ImagenBomba.png");
+				if (b.getCampoJuego()[i][j] instanceof CasillaMina) {
+					ImageIcon bomba = new ImageIcon("ImagenBomba.png");
 					devolverCasilla(i, j).setIcon(bomba);
 					devolverCasilla(i, j).setEnabled(false);
 				}
@@ -205,21 +202,21 @@ public class VentanaBuscaminas implements Observer {
 	//    }
 
 	public void controlMouse(MouseEvent e, int pFila, int pCol) {
-		cas = b.getCampoJuego();
+		;
 		if (SwingUtilities.isLeftMouseButton(e)) {
-			cas[pFila][pCol].descubrirCasilla();
+			b.descubrirCasilla(pFila,pCol);
 			//if (finJuego()) salirJuego();
 		}
 		else if (SwingUtilities.isRightMouseButton(e)) {
-			if (cas[pFila][pCol].isDescubierta()){}
+			if (b.isDescubierta(pFila,pCol)){}
 			else if (b.getContador() == 0){}
-			else if (!cas[pFila][pCol].getMarcadaBandera()) {
+			else if (!b.isMarcadaBandera(pFila, pCol)) {
 				b.setContador(-1);
-				cas[pFila][pCol].marcarBandera();
+				b.marcarBandera(pFila, pCol);
 			}
-			else if (cas[pFila][pCol].getMarcadaBandera()){
+			else if (b.isMarcadaBandera(pFila, pCol)){
 				b.setContador(1);
-				cas[pFila][pCol].desmarcarBandera();
+				b.desmarcarBandera(pFila,pCol);
 			}
 		}
 	}
@@ -231,7 +228,7 @@ public class VentanaBuscaminas implements Observer {
 		int y = ((Casilla) o).getCoordenada().getAncho();
 
 		if (arg.equals("marcarBandera")){
-			ImageIcon bandera = new ImageIcon("C:/Users/Olatz/Desktop/BUSCAMINAS_IS/source/src/main/java/com/okas/packVista/ImagenBandera.png");
+			ImageIcon bandera = new ImageIcon("ImagenBandera.png");
 			matrizBotones[x][y].setIcon(bandera);
 			lblNumMinas.setText("Minas: "+b.getContador());
 		}
@@ -248,7 +245,7 @@ public class VentanaBuscaminas implements Observer {
 
 			}
 			else if(o instanceof CasillaMina){
-				ImageIcon icono2 = new ImageIcon("C:/Users/Olatz/Desktop/BUSCAMINAS_IS/source/src/main/java/com/okas/packVista/tobal.png");
+				ImageIcon icono2 = new ImageIcon("tobal.png");
 				btnReiniciar.setIcon(icono2);
 				mostrarMinas();
 				bloquearBotones();
