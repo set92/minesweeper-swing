@@ -181,7 +181,7 @@ public class Tablero {
                 Casilla unaCasilla = campoJuego[numeroAleatorio][numeroAleatorio2];
                 if (!(unaCasilla instanceof CasillaMina)) {
                     Coordenada nuevaPos = new Coordenada(numeroAleatorio, numeroAleatorio2);
-                    Casilla nuevaMina = CasillaFactory.getCasillaFactory().createCasilla("Cero",
+                    Casilla nuevaMina = CasillaFactory.getCasillaFactory().createCasilla("Mina",
 							nuevaPos);
                     campoJuego[numeroAleatorio][numeroAleatorio2] = nuevaMina;
                     incrementarAlrededores(nuevaMina.pos);
@@ -207,11 +207,11 @@ public class Tablero {
 						if (casillaActual instanceof CasillaValor) {
 							((CasillaValor) casillaActual).incrementarValor();
 						} else if (casillaActual instanceof CasillaValorCero) {
-							campoJuego[i][j] = CasillaFactory.getCasillaFactory().createCasilla("valor", casillaActual.getCoordenada());
+							campoJuego[i][j] = CasillaFactory.getCasillaFactory().createCasilla("Valor", casillaActual.getCoordenada());
 						}
 					} else if (casillaActual == null) {
 						Coordenada coor = new Coordenada(i,j);
-						campoJuego[i][j] = new CasillaValor(coor);
+						campoJuego[i][j] = CasillaFactory.getCasillaFactory().createCasilla("Valor", coor);
 					}
 				}
 			}
