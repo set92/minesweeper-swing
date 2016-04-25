@@ -117,3 +117,7 @@ release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
+
+# Visual Paradigm
+Buscaminas.vpp~2
+Buscaminas.vpp~3

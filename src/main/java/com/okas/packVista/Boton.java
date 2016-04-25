@@ -1,28 +1,19 @@
 package com.okas.packVista;
 
+import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
-import javax.swing.JButton;
 
 public class Boton extends JButton { //Esta clase sirve para tener un JButton con coordenadas
 	
 	private int posAlto;
 	private int posAncho;
+
 	public Boton(int pPosx, int pPosy){
 		posAlto = pPosx;
 		posAncho = pPosy;
-		
 	}
 
-	public int getAlto(){
-		return posAlto;
-	}
-	
-	public int getAncho(){
-		return posAncho;
-	}
-	
 	/**
      * Anade una funcion al botón
      * @param vB 
