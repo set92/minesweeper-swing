@@ -1,6 +1,5 @@
 package com.okas.packModelo;
 
-import com.okas.packVista.Reloj;
 import com.okas.packVista.VentanaBuscaminas;
 
 public class Buscaminas {
@@ -9,7 +8,6 @@ public class Buscaminas {
     private Tablero tablero;
     private int contador = 0;
    // private int puntuacion;
-    private Reloj reloj;
     private static Buscaminas miBuscaminas = null;
     private TableroBuilder tableroBuilder;
 

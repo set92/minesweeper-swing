@@ -27,7 +27,7 @@ public class VentanaLogin extends JFrame {
 	private static VentanaLogin ventana;
 	
 	public static VentanaLogin getVentana(){
-		if(ventana==null){
+		if(ventana == null){
             try {
               //  UIManager.setLookAndFeel("com.jtattoo.plaf.luna.LunaLookAndFeel");
             } catch (Exception e) {
@@ -40,9 +40,9 @@ public class VentanaLogin extends JFrame {
 	
 	private VentanaLogin() {
 		initialize();
+        getRootPane().setDefaultButton(getBtnStartGame());
 	}
 	private void initialize() {
-
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		addWindowListener(getControlador());
 		setBounds(100, 100, 450, 300);
@@ -171,7 +171,7 @@ public class VentanaLogin extends JFrame {
 			if(e.getActionCommand().equals("startGame")){
 				jugar();
             } else if (e.getActionCommand().equals("displayRanking")){
-                //VentanaRanking.getVentana().setVisible(true);
+                VentanaRanking.getVentana().setVisible(true);
 			}
 		}
 	}

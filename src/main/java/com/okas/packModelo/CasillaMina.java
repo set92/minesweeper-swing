@@ -13,6 +13,7 @@ public class CasillaMina extends Casilla {
     public void descubrirCasilla() {
     	if(!marcadaBandera) {
     		marcarDescubierta();
+            ContadorTiempo.getGestor().setRunning(false);
     		this.setChanged();
         	this.notifyObservers("descubrirCasilla,"+pos.getAlto()+","+pos.getAncho());
     	}    

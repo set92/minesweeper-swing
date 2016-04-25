@@ -18,14 +18,15 @@ public class VentanaRanking extends JFrame {
     private static VentanaRanking ventana;
 
     public static VentanaRanking getVentana(){
-        if(ventana==null){
-            ventana=new VentanaRanking();
-        }
+        if(ventana == null) ventana = new VentanaRanking();
         return ventana;
     }
+
     private VentanaRanking() {
         initialize();
+        getRootPane().setDefaultButton(getBtnVolver());
     }
+
     private void initialize() {
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(getControlador());
@@ -64,13 +65,15 @@ public class VentanaRanking extends JFrame {
         setLocationRelativeTo(null);
         setTitle("Ranking");
     }
+
     private JLabel getLblRanking() {
         if (lblRanking == null) {
-            lblRanking = new JLabel("Ranking");
-            lblRanking.setFont(new Font("Tahoma", Font.BOLD, 14));
+            lblRanking = new JLabel("TOP 10");
+            lblRanking.setFont(new Font("Times New Roman", Font.BOLD, 16));
         }
         return lblRanking;
     }
+
     private JTextArea getTextArea() {
         if (textArea == null) {
             textArea = new JTextArea();
@@ -89,14 +92,11 @@ public class VentanaRanking extends JFrame {
     }
 
     private Controlador getControlador(){
-        if (controlador==null){
-            controlador=new Controlador();
-        }
+        if (controlador == null) controlador = new Controlador();
         return controlador;
     }
 
     private class Controlador extends WindowAdapter implements ActionListener {
-
         @Override
         public void windowClosing(WindowEvent e) {
             volver();
@@ -107,13 +107,11 @@ public class VentanaRanking extends JFrame {
             if(e.getActionCommand().equals("PressVolver")){
                 volver();
             }
-
         }
     }
 
     private void volver(){
         VentanaRanking.getVentana().setVisible(false);
-        VentanaLogin.getVentana().setVisible(true);
-        getVentana().ventana = null;
+        ventana = null;
     }
 }

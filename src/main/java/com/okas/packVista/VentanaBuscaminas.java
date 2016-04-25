@@ -10,19 +10,13 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class VentanaBuscaminas implements Observer {
-	public JFrame getJf() {
-		return jf;
-	}
-
 	public static JFrame jf;
 	private JPanel matrizCampoJuego;
 	private JPanel panelBotonesSup;
 	private Boton[][] matrizBotones;
-
 	private JLabel lblNumMinas;
 	private JButton btnReiniciar;
 	private JLabel lblTiempo;
-
 
 	private static VentanaBuscaminas ventana;
 	private Buscaminas b = Buscaminas.getBuscaminas();//Lo pongo aqui para solo ponerlo 1 vez (variable local)
@@ -31,6 +25,10 @@ public class VentanaBuscaminas implements Observer {
 		if (ventana == null) ventana = new VentanaBuscaminas();
 		return ventana;
 	}
+
+    public JFrame getJf() {
+        return jf;
+    }
 
 	private VentanaBuscaminas() {
 		initialize();
@@ -51,11 +49,16 @@ public class VentanaBuscaminas implements Observer {
 		contentPane.setBorder(new EmptyBorder(3, 3, 3, 3));
 		contentPane.setLayout(new BorderLayout(0, 0));
 
+        ContadorTiempo.getGestor().addObserver(this);
+        ContadorTiempo.getGestor().reset();
+        ContadorTiempo.getGestor().setRunning(true);
+
+        b.anadirObservadores(this);
+
 		contentPane.add(getBotonesSup(), BorderLayout.NORTH);
 		contentPane.add(getMatrizCampoJuego(), BorderLayout.CENTER);
 		jf.setLocationRelativeTo(null);
 		jf.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		b.anadirObservadores(this);
 	}
 
 	private JPanel getBotonesSup() {
@@ -71,7 +74,7 @@ public class VentanaBuscaminas implements Observer {
 							.addGap(6)
 							.addComponent(getBtnReiniciar(), GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
 							.addGap(10)
-							.addComponent(getLblTiempo(), GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+							.addComponent(getLblTiempo(), GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 							.addGap(130)));
 			gl_botonesSup.setVerticalGroup(
@@ -96,9 +99,10 @@ public class VentanaBuscaminas implements Observer {
 	}
 
 	private JLabel getLblNumMinas() {
-		if (lblNumMinas == null) lblNumMinas = new JLabel("Minas: "+b.getContador());
+		if (lblNumMinas == null) lblNumMinas = new JLabel("Minas: " + b.getContador());
 		return lblNumMinas;
 	}
+
 	private JButton getBtnReiniciar() {
 		if (btnReiniciar == null) {
 			btnReiniciar = new JButton("");
@@ -122,12 +126,12 @@ public class VentanaBuscaminas implements Observer {
 	private JPanel getMatrizCampoJuego() {
 		if (matrizCampoJuego == null) {
 			matrizCampoJuego = new JPanel();
-			if (b.getAlto() == 7)
-				matrizCampoJuego.setLayout(new GridLayout(7, 10, 0, 0));
-			else if (b.getAlto() == 10)
-				matrizCampoJuego.setLayout(new GridLayout(10, 15, 0, 0));
-			else if (b.getAlto() == 12)
-				matrizCampoJuego.setLayout(new GridLayout(12, 25, 0, 0));
+
+            switch (b.getAlto()){
+                case 7: matrizCampoJuego.setLayout(new GridLayout(7, 10, 0, 0));break;
+                case 10: matrizCampoJuego.setLayout(new GridLayout(10, 15, 0, 0));break;
+                case 12: matrizCampoJuego.setLayout(new GridLayout(12, 25, 0, 0));break;
+            }
 
 			matrizCampoJuego.setBackground(Color.WHITE);
 			crearMatrizBotones();
@@ -138,7 +142,6 @@ public class VentanaBuscaminas implements Observer {
 		return matrizCampoJuego;
 	}
 
-
 	private void crearMatrizBotones() {
 		if (matrizBotones == null) {
 			matrizBotones = new Boton[b.getAlto()][b.getAncho()];
@@ -146,16 +149,16 @@ public class VentanaBuscaminas implements Observer {
 				for (int j = 0; j < b.getAncho(); j++){
 					Boton boton = new Boton(i,j);
 					boton.anadirFuncion(this);
-					matrizBotones[i][j] =boton ;
+					matrizBotones[i][j] = boton;
 					boton.setFocusable(false);
 				}
 			}
 		}
 	}
+
 	private JButton devolverCasilla(int pFila, int pColum){
 		return matrizBotones[pFila][pColum];
 	}
-
 
 	private void bloquearBotones() {
 		for (int i = 0; i < b.getAlto(); i++){
@@ -180,8 +183,6 @@ public class VentanaBuscaminas implements Observer {
 		}
 	}
 
-
-
 	//    TODO REHACER METODO, TIENE QUE ESTAR EN EL MODELO, NO LA VISTA
 	//    private boolean finJuego() {
 	//        boolean terminado = false;
@@ -202,19 +203,16 @@ public class VentanaBuscaminas implements Observer {
 	//    }
 
 	public void controlMouse(MouseEvent e, int pFila, int pCol) {
-		;
 		if (SwingUtilities.isLeftMouseButton(e)) {
 			b.descubrirCasilla(pFila,pCol);
 			//if (finJuego()) salirJuego();
-		}
-		else if (SwingUtilities.isRightMouseButton(e)) {
+		} else if (SwingUtilities.isRightMouseButton(e)) {
 			if (b.isDescubierta(pFila,pCol)){}
 			else if (b.getContador() == 0){}
 			else if (!b.isMarcadaBandera(pFila, pCol)) {
 				b.setContador(-1);
 				b.marcarBandera(pFila, pCol);
-			}
-			else if (b.isMarcadaBandera(pFila, pCol)){
+			} else if (b.isMarcadaBandera(pFila, pCol)){
 				b.setContador(1);
 				b.desmarcarBandera(pFila,pCol);
 			}
@@ -222,49 +220,46 @@ public class VentanaBuscaminas implements Observer {
 	}
 
 	@Override
-	public void update(Observable o, Object arg) {	
-		String cadena = (String) arg;
-		String[] sp = cadena.split(",");
-		String accion = sp[0];
-		String alto = sp[1];
-		String ancho = sp[2];
+	public void update(Observable o, Object arg) {
+        if (o instanceof ContadorTiempo){
+            getLblTiempo().setText("Tiempo: " + ContadorTiempo.getGestor().mostrarEnLabel());
+        } else if(o instanceof Casilla){
+            String cadena = (String) arg;
+            String[] sp = cadena.split(",");
+            String accion = sp[0];
+            String alto = sp[1];
+            String ancho = sp[2];
 
-		int x = Integer.parseInt(alto);
-		int y = Integer.parseInt(ancho);
+            int x = Integer.parseInt(alto);
+            int y = Integer.parseInt(ancho);
 
-		if (accion.equals("marcarBandera")){
-			ImageIcon bandera = new ImageIcon("src/main/resources/ImagenBandera.png");
-			devolverCasilla(x, y).setIcon(bandera);
-			lblNumMinas.setText("Minas: "+b.getContador());
-		}
-		else if (accion.equals("desmarcarBandera")){
-			devolverCasilla(x, y).setIcon(null);
-			lblNumMinas.setText("Minas: "+b.getContador());
-		}
-		else if (accion.equals("descubrirCasilla")){
-			if(o instanceof CasillaValor){
-				System.out.println("valor");
-				devolverCasilla(x, y).setText(""+((CasillaValor)o).getValor());
-				devolverCasilla(x, y).setEnabled(false);
-				devolverCasilla(x, y).setBackground(Color.WHITE);
-				devolverCasilla(x, y).setForeground(Color.BLACK);
+            if (accion.equals("marcarBandera")){
+                ImageIcon bandera = new ImageIcon("src/main/resources/ImagenBandera.png");
+                devolverCasilla(x, y).setIcon(bandera);
+                lblNumMinas.setText("Minas: "+b.getContador());
+            } else if (accion.equals("desmarcarBandera")){
+                devolverCasilla(x, y).setIcon(null);
+                lblNumMinas.setText("Minas: "+b.getContador());
+            } else if (accion.equals("descubrirCasilla")){
+                if(o instanceof CasillaValor){
+                    devolverCasilla(x, y).setText(""+((CasillaValor)o).getValor());
+                    devolverCasilla(x, y).setEnabled(false);
+                    devolverCasilla(x, y).setBackground(Color.WHITE);
+                    devolverCasilla(x, y).setForeground(Color.BLACK);
+                } else if(o instanceof CasillaMina){
+                    ImageIcon icono2 = new ImageIcon("src/main/resources/tobal.png");
+                    btnReiniciar.setIcon(icono2);
+                    mostrarMinas();
+                    bloquearBotones();
+                    JOptionPane.showMessageDialog(null, "GAME OVER");
+                } else if(o instanceof CasillaValorCero){
+                    devolverCasilla(x, y).setEnabled(false);
+                    devolverCasilla(x, y).setBackground(Color.WHITE);
+                    devolverCasilla(x, y).setForeground(Color.BLACK);
+                    devolverCasilla(x, y).setText(" ");
+                }
+            }
+        }
 
-			}
-			else if(o instanceof CasillaMina){
-				System.out.println("mina");
-				ImageIcon icono2 = new ImageIcon("src/main/resources/tobal.png");
-				btnReiniciar.setIcon(icono2);
-				mostrarMinas();
-				bloquearBotones();
-				JOptionPane.showMessageDialog(null, "GAME OVER");
-			}
-			else if(o instanceof CasillaValorCero){
-				System.out.println("cero");
-				devolverCasilla(x, y).setEnabled(false);
-				devolverCasilla(x, y).setBackground(Color.WHITE);
-				devolverCasilla(x, y).setForeground(Color.BLACK);
-				devolverCasilla(x, y).setText(" ");
-			}
-		}
 	}
 }
