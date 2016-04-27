@@ -1,6 +1,7 @@
 package com.okas.packVista;
 
 import com.okas.packModelo.Buscaminas;
+import com.okas.packModelo.Sesion;
 import com.okas.packModelo.Usuario;
 
 import javax.swing.*;
@@ -181,8 +182,10 @@ public class VentanaLogin extends JFrame {
         Usuario user;
         if (getTextField().getText().equals("")) user = new Usuario("Anon", 0);
         else user = new Usuario(getTextField().getText(), 0);
+        Sesion.getSesion().setUsuario(user);
 
         Buscaminas.getBuscaminas().crearJuego(Integer.parseInt(getComboBox().getSelectedItem().toString()));
         VentanaBuscaminas.getVentana().getJf().setVisible(true);
+        Sesion.getSesion().setNivel(Integer.parseInt(getComboBox().getSelectedItem().toString()));
     }
 }

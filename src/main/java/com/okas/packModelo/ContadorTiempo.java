@@ -24,6 +24,11 @@ public class ContadorTiempo extends Observable{
         if(mContadorTiempo == null) mContadorTiempo = new ContadorTiempo();
         return mContadorTiempo;
     }
+    
+    public String getTiempo(){
+    	String tiempo = timeMinutes+":"+timeSeconds;
+    	return tiempo;
+    }
 
     public void setRunning(boolean running) {
         this.running = running;
