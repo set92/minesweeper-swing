@@ -23,6 +23,8 @@ public class Sesion {
 			miSesion = new Sesion();
 		return miSesion;
 	}
+	
+	public Usuario getUsuario(){ return user;}
 
 	public void setNivel(int pNivel){
 		nivel = pNivel;

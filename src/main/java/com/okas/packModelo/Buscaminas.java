@@ -8,29 +8,25 @@ public class Buscaminas {
 	private boolean finJuego = false;
 	private Tablero tablero;
 	private int contador = 0;
-	// private int puntuacion = 0;
 	private static Buscaminas miBuscaminas = null;
 	private TableroBuilder tableroBuilder;
+	private Usuario user;
 
 	private Buscaminas(){}
-
+	
+	public void setNivel(int pNivel){ nivel = pNivel; }
+	public int getNivel(){ return nivel; }
 	public int getAlto(){ return tablero.getAlto(); }
 	public int getAncho(){ return tablero.getAncho(); }
 	public int getNumMinas(){ return tablero.getNumMinas(); }
-	public int getContador(){
-		return contador;
-	}
-	public void setContador(int n){
-		contador = contador + n;
-	}
+	public int getContador(){return contador;}
+	public void setContador(int n){ contador = contador + n; }
+	public void setUsuario(Usuario pUsuario){ user = pUsuario; }
+	
 	public Casilla[][] getCampoJuego(){ return tablero.getCampoJuego(); }
 
 	public void setTableroBuilder(TableroBuilder tabBuilder){
 		tableroBuilder = tabBuilder;
-	}
-
-	public int getNivel(){
-		return nivel;
 	}
 
 	public static Buscaminas getBuscaminas(){

@@ -26,6 +26,7 @@ public class VentanaLogin extends JFrame {
 	private JButton btnStartGame;
 	private Controlador controlador;
 	private static VentanaLogin ventana;
+	protected int nivel;
 	
 	public static VentanaLogin getVentana(){
 		if(ventana == null){
@@ -172,7 +173,10 @@ public class VentanaLogin extends JFrame {
 			if(e.getActionCommand().equals("startGame")){
 				jugar();
             } else if (e.getActionCommand().equals("displayRanking")){
-                VentanaRanking.getVentana().setVisible(true);
+            	nivel = Integer.parseInt(getComboBox().getSelectedItem().toString());
+            	VentanaRanking.getVentana().setVisible(true);
+                System.out.println(nivel);
+                
 			}
 		}
 	}
@@ -182,10 +186,10 @@ public class VentanaLogin extends JFrame {
         Usuario user;
         if (getTextField().getText().equals("")) user = new Usuario("Anon", 0);
         else user = new Usuario(getTextField().getText(), 0);
-        Sesion.getSesion().setUsuario(user);
+        Buscaminas.getBuscaminas().setUsuario(user);
 
         Buscaminas.getBuscaminas().crearJuego(Integer.parseInt(getComboBox().getSelectedItem().toString()));
         VentanaBuscaminas.getVentana().getJf().setVisible(true);
-        Sesion.getSesion().setNivel(Integer.parseInt(getComboBox().getSelectedItem().toString()));
+        Buscaminas.getBuscaminas().setNivel(Integer.parseInt(getComboBox().getSelectedItem().toString()));
     }
 }

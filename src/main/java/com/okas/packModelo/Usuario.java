@@ -4,7 +4,6 @@ package com.okas.packModelo;
 public class Usuario {
     private String nombreUsuario;
     private int ptosUsuario;
-    private int timeSeconds, timeMinutes;
 
     public Usuario(String nombreUsuario, int ptosUsuario) {
         this.nombreUsuario = nombreUsuario;
