@@ -39,11 +39,15 @@ public class ContadorTiempo extends Observable{
             timeSeconds++;
             if(timeSeconds == 60){
                 timeMinutes++;
-                timeSeconds =0;
+                timeSeconds = 0;
             }
             this.setChanged();
             this.notifyObservers();
         }
+    }
+
+    public int getTiempoEnSegundos(){
+        return timeSeconds + timeMinutes*60;
     }
 
     public String mostrarEnLabel(){

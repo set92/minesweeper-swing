@@ -3,7 +3,6 @@ package com.okas.packVista;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-import com.okas.packModelo.Buscaminas;
 import com.okas.packModelo.CatalogoUsuarios;
 
 import java.awt.*;
@@ -81,7 +80,7 @@ public class VentanaRanking extends JFrame {
     private JTextArea getTextArea() {
         if (textArea == null) {
             textArea = new JTextArea();
-            textArea.setText(CatalogoUsuarios.getCatalogoUsuarios().mostrarLista(VentanaLogin.getVentana().nivel).pasarLtaAString());
+            textArea.setText(CatalogoUsuarios.getCatalogoUsuarios().mostrarLista(VentanaLogin.getVentana().nivel).pasarListaAString());
             textArea.setEditable(false);
         }
         return textArea;

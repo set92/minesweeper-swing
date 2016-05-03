@@ -14,15 +14,17 @@ public class Buscaminas {
 
 	private Buscaminas(){}
 	
-	public void setNivel(int pNivel){ nivel = pNivel; }
+
 	public int getNivel(){ return nivel; }
 	public int getAlto(){ return tablero.getAlto(); }
 	public int getAncho(){ return tablero.getAncho(); }
 	public int getNumMinas(){ return tablero.getNumMinas(); }
 	public int getContador(){return contador;}
+    public Usuario getUser() { return user; }
+    public void setNivel(int pNivel){ nivel = pNivel; }
 	public void setContador(int n){ contador = contador + n; }
 	public void setUsuario(Usuario pUsuario){ user = pUsuario; }
-	
+
 	public Casilla[][] getCampoJuego(){ return tablero.getCampoJuego(); }
 
 	public void setTableroBuilder(TableroBuilder tabBuilder){
@@ -51,10 +53,10 @@ public class Buscaminas {
 	 */
 	public Tablero crearJuego(int nivel){
 		switch (nivel){
-		case 1: tableroBuilder = new BuilderN1();break;
-		case 2: tableroBuilder = new BuilderN2();break;
-		case 3: tableroBuilder = new BuilderN3();break;
-		default: tableroBuilder = new BuilderN1();break;
+            case 1: tableroBuilder = new BuilderN1();break;
+            case 2: tableroBuilder = new BuilderN2();break;
+            case 3: tableroBuilder = new BuilderN3();break;
+            default: tableroBuilder = new BuilderN1();break;
 		}
 
 		tablero = tableroBuilder.construirTablero();
@@ -68,7 +70,6 @@ public class Buscaminas {
 	 * Anadir por cada casilla el Observador que trae como parámetro
 	 * @param ventanaBuscaminas Para anadir la VentanaBuscaminas como Observador
 	 */
-
 	public void anadirObservadores(VentanaBuscaminas ventanaBuscaminas) {
 		for (Casilla[] casilla : tablero.getCampoJuego()) {
 			for (Casilla casilla1: casilla ){
@@ -76,8 +77,6 @@ public class Buscaminas {
 			}
 		}
 	}
-
-
 
 	/**
 	 * Descubre la casilla que le proporciona el parametro
@@ -138,4 +137,6 @@ public class Buscaminas {
 	}
 
 	public void setTablero(Tablero tb){this.tablero=tb;} //para jUnits
+
+
 }

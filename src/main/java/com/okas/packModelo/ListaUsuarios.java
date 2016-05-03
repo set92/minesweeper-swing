@@ -13,7 +13,6 @@ public class ListaUsuarios {
 	}
 	
 	public void cargarDatos(String pFile){
-
 			BufferedReader f = null;
 			try {
 				f = new BufferedReader(new FileReader(pFile));
@@ -23,16 +22,16 @@ public class ListaUsuarios {
 			Scanner sc = new Scanner(f);
 			while (sc.hasNextLine()){
 				String linea = sc.nextLine();
-				String[] sp = linea.split(" ");
+				String[] sp = linea.split("\\s+");
 				String nombre = sp[0];
 				String puntuacion = sp[1];
-				Usuario us = new Usuario(nombre,Integer.parseInt(puntuacion));
+				Usuario us = new Usuario(nombre, Integer.parseInt(puntuacion));
 				lista.add(us);
 			}
 			sc.close();	
 	}
 	
-	public String pasarLtaAString(){
+	public String pasarListaAString(){
 		String lta = new String();
 		for (Usuario usuario : lista) {
 			lta += usuario.getNombreUsuario()+"\t"+usuario.getPtosUsuario()+"\n";

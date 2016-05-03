@@ -260,8 +260,8 @@ public class VentanaBuscaminas implements Observer {
 					mostrarMinas();
 					bloquearBotones();
 					JOptionPane.showMessageDialog(null, "GAME OVER");
-					int puntos = Integer.parseInt(ContadorTiempo.getGestor().getTiempo());
-					Sesion.getSesion().getUsuario().setPtosUsuario(puntos);
+					int puntos = ContadorTiempo.getGestor().getTiempoEnSegundos();
+					Buscaminas.getBuscaminas().getUser().setPtosUsuario(puntos);
 					VentanaRanking.getVentana().setVisible(true);
 				} else if(o instanceof CasillaValorCero){
 					devolverCasilla(x, y).setEnabled(false);
