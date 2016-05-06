@@ -207,7 +207,7 @@ public class VentanaBuscaminas implements Observer {
 			b.descubrirCasilla(pFila,pCol);
 			if(!b.estaFinalizado())
 			{
-				if (b.juegoAcabado()){
+				if (b.juegoGanado()){
 					jf.setVisible(false);       
 					JOptionPane.showMessageDialog(null, "¡HAS GANADO!");
 					VentanaRanking.getVentana().setVisible(true);

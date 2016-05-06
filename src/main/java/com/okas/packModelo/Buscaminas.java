@@ -1,10 +1,13 @@
 package com.okas.packModelo;
 
+import java.util.ArrayList;
+
 import com.okas.packVista.VentanaBuscaminas;
 
 public class Buscaminas {
 
 	private int nivel;
+	private boolean juegoGanado  = false;
 	private boolean finJuego = false;
 	private Tablero tablero;
 	private int contador = 0;
@@ -99,20 +102,32 @@ public class Buscaminas {
 	}
 
 
-	public boolean juegoAcabado(){
-		boolean terminado = false;
+	public boolean juegoGanado(){
 		int cont = 0;
 		for (int i = 0; i < tablero.getAlto(); i++) {
 			for (int j = 0; j < tablero.getAncho(); j++) {
-				if (!tablero.getCampoJuego()[i][j].isDescubierta()) cont++;
+				if (!(tablero.getCampoJuego()[i][j] instanceof CasillaMina) && (tablero.getCampoJuego()[i][j].isDescubierta())) cont++;
 			}
 		}
-		if (cont == Buscaminas.getBuscaminas().getNumMinas()) terminado = true;
-		if(terminado){
+		int numCasillasNoMina = (Buscaminas.getBuscaminas().getAlto() * Buscaminas.getBuscaminas().getAncho()) - Buscaminas.getBuscaminas().getNumMinas();
+		if (cont == numCasillasNoMina){
 			finJuego = true;
-			Sesion.getSesion().guardarSesion();
+			user.setPtosUsuario(setPuntuacion());
+			System.out.println("0-0");
+			Sesion.getSesion().setPuntuos(setPuntuacion());
+			//Sesion.getSesion().guardarSesion();
+			ArrayList<String> userS = new ArrayList<>();
+			userS.add(user.getNombreUsuario());
+			userS.add(String.valueOf(user.getPtosUsuario()));
+			CatalogoUsuarios.getCatalogoUsuarios().addUser(userS, nivel);
 		}
+		
 		return finJuego;
+	}
+	
+	public int setPuntuacion(){
+		int puntuacion = ContadorTiempo.getGestor().getTiempoEnSegundos();
+		return puntuacion;
 	}
 
 	/**

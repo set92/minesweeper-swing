@@ -26,6 +26,8 @@ public class Sesion {
 	
 	public Usuario getUsuario(){ return user;}
 
+	public int getNivel(){ return nivel;}
+	
 	public void setNivel(int pNivel){
 		nivel = pNivel;
 	}
@@ -33,20 +35,25 @@ public class Sesion {
 	public void setUsuario(Usuario pUsuario){
 		user = pUsuario;
 	}
+	public void setPuntuos(int puntos){
+		user.setPtosUsuario(puntos);
+	}
 
 	public void guardarSesion(){
 		String ruta = null;
 		if(nivel == 1){
-			ruta = "src/main/resources/rankingNivel1.txt";
+			ruta = "src\\main\\resources\\rankingNivel1.txt";
 		}
 		else if (nivel == 2){
-			ruta = "src/main/resources/rankingNivel2.txt";
+			ruta = "src\\main\\resources\\rankingNivel2.txt";
 		}
 		else if (nivel == 3){
-			ruta = "src/main/resources/rankingNivel3.txt";
+			ruta = "src\\main\\resources\\rankingNivel3.txt";
 		}
-		escribirEnRanking(ruta);
+		//CatalogoUsuarios.getCatalogoUsuarios().guardarUsuario(ruta);
+		//escribirEnRanking(ruta);
 	}
+	
 	
 	public boolean estaUsuario(String ruta, String pNombre){
 		boolean esta = false;
@@ -93,7 +100,7 @@ public class Sesion {
 
 	public void escribirEnRanking(String ruta){
 		File fichero = new File(ruta);
-		if (fichero.exists()){
+		if (!fichero.exists()){
 			System.out.println("Error Ranking");
 		}
 		else{
