@@ -24,34 +24,25 @@ public class ListaUsuarios {
 	}
 
 	public String getRanking(String nivel){
-		ArrayList<String> ranking = new ArrayList<String>();
-		HashMap<String, String> aux = new HashMap<String, String>();
+		String ranking = "Jugadores: \n";
+		HashMap<String, Integer> aux = new HashMap<String, Integer>();
 		Iterator it = lista.entrySet().iterator();
 		while (it.hasNext()) {
 			Map.Entry e = (Map.Entry)it.next();
-			System.out.println(e.getKey()+" "+e.getValue());
 			if(e.getValue().equals(nivel)){
 				ArrayList<String> user = (ArrayList<String>) e.getKey();
-				aux.put(user.get(0), user.get(1));
+				aux.put(user.get(0), Integer.parseInt(user.get(1)));
 			}
 		}
-		System.out.println("paso 2");
 		aux = ordenarPorValor(aux); 
-
-		System.out.println("paso 3");
-		for(int i = 0; i< 10 ; i++){
-			Iterator ite = aux.entrySet().iterator();
-			while (ite.hasNext()) {
-				Map.Entry e = (Map.Entry)ite.next();
-				String top = e.getKey() + " " + e.getValue();
-				ranking.add(top);
-			}
+		int cont = 10;
+		Iterator ite = aux.entrySet().iterator();
+		while (ite.hasNext() && cont != 0) {
+			Map.Entry e = (Map.Entry)ite.next();
+			ranking = ranking+ e.getKey() + " " + e.getValue()+"\n";
+			cont--;
 		}
-		String lta = new String();
-		for (String str : ranking) {
-			lta +=str+"\n";
-		}
-		return lta;
+		return ranking;
 	}
 
 
@@ -59,7 +50,7 @@ public class ListaUsuarios {
 		List list = new LinkedList(map.entrySet());
 		// Defined Custom Comparator here
 		Collections.sort(list, new Comparator() {
-			public int compare(Object o1, Object o2) {
+			public int compare(Object o2, Object o1) {
 				return ((Comparable) ((Map.Entry) (o1)).getValue())
 						.compareTo(((Map.Entry) (o2)).getValue());
 			}

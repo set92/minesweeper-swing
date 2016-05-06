@@ -20,7 +20,6 @@ public class Usuario {
 
     public void setPtosUsuario(int ptosUsuario) {
     	int puntos = (1000/ptosUsuario);
-    	System.out.println("Tienes "+puntos+" puntos");
         this.ptosUsuario = puntos;
     }
 }

@@ -113,7 +113,6 @@ public class Buscaminas {
 		if (cont == numCasillasNoMina){
 			finJuego = true;
 			user.setPtosUsuario(setPuntuacion());
-			System.out.println("0-0");
 			Sesion.getSesion().setPuntuos(setPuntuacion());
 			//Sesion.getSesion().guardarSesion();
 			ArrayList<String> userS = new ArrayList<>();
