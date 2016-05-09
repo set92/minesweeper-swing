@@ -1,13 +1,13 @@
 package com.okas.packModelo;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class UsuarioTest {
 	
-	Usuario us = new Usuario("jorge",0);
-	Usuario us2 = new Usuario("sergio", 1000);
+	final Usuario us = new Usuario("jorge",0);
+	final Usuario us2 = new Usuario("sergio", 1000);
 
 	@Test
 	public void test() {
