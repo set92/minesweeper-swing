@@ -1,25 +1,28 @@
 package com.okas.packVista;
 
-import com.okas.packModelo.Buscaminas;
-import com.okas.packModelo.CatalogoUsuarios;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
+import com.okas.packModelo.Buscaminas;
+import com.okas.packModelo.CatalogoUsuarios;
+import com.okas.packModelo.Sesion;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-class VentanaRanking extends JFrame {
+public class VentanaRanking extends JFrame {
 
-    private JLabel lblRanking;
+	private JPanel contentPane;
+	private JLabel lblRanking;
 	private JTextArea textArea;
 	private JButton btnVolver;
 	private Controlador controlador;
 	private static VentanaRanking ventana;
 
-	static VentanaRanking getVentana(){
+	public static VentanaRanking getVentana(){
 		if(ventana == null) ventana = new VentanaRanking();
 		return ventana;
 	}
@@ -30,10 +33,10 @@ class VentanaRanking extends JFrame {
 	}
 
 	private void initialize() {
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		addWindowListener(getControlador());
 		setBounds(100, 100, 450, 350);
-        JPanel contentPane = new JPanel();
+		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
@@ -79,12 +82,11 @@ class VentanaRanking extends JFrame {
 	private JTextArea getTextArea() {
 		if (textArea == null) {
 			textArea = new JTextArea();
-			textArea.setText(CatalogoUsuarios.getCatalogoUsuarios().mostrarLista(Buscaminas.getBuscaminas().getNivel()));
+			textArea.setText(CatalogoUsuarios.getCatalogoUsuarios().mostrarLista(Sesion.getSesion().getNivel()));
 			textArea.setEditable(false);
 		}
 		return textArea;
 	}
-
 	private JButton getBtnVolver() {
 		if (btnVolver == null) {
 			btnVolver = new JButton("Volver");
@@ -105,12 +107,7 @@ class VentanaRanking extends JFrame {
 			volver();
 		}
 
-        @Override
-        public void windowActivated(WindowEvent e) {
-            if (textArea != null) textArea.setText(CatalogoUsuarios.getCatalogoUsuarios().mostrarLista(Buscaminas.getBuscaminas().getNivel()));
-        }
-
-        @Override
+		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(e.getActionCommand().equals("PressVolver")){
 				volver();
@@ -121,6 +118,6 @@ class VentanaRanking extends JFrame {
 	private void volver(){
 		VentanaRanking.getVentana().setVisible(false);
 		ventana = null;
-        VentanaLogin.getVentana().setVisible(true);
+		VentanaLogin.getVentana().setVisible(true);
 	}
 }

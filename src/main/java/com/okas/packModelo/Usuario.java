@@ -2,7 +2,7 @@ package com.okas.packModelo;
 
 
 public class Usuario {
-    private final String nombreUsuario;
+    private String nombreUsuario;
     private int ptosUsuario;
 
     public Usuario(String nombreUsuario, int ptosUsuario) {
@@ -19,6 +19,7 @@ public class Usuario {
     }
 
     public void setPtosUsuario(int ptosUsuario) {
-        this.ptosUsuario = (1000/ptosUsuario);
+    	int puntos = (1000/ptosUsuario);
+        this.ptosUsuario = puntos;
     }
 }

@@ -3,10 +3,10 @@ package com.okas.packModelo;
 import java.util.ArrayList;
 
 public class ListaCasillas extends ArrayList<Casilla>{
-    private final ArrayList<Casilla> listaCasilla;
+    private ArrayList<Casilla> listaCasilla;
     
     public ListaCasillas(){
-    	this.listaCasilla = new ArrayList<>();
+    	this.listaCasilla = new ArrayList<Casilla>();
     }
     
     /**

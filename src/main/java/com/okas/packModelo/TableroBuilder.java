@@ -1,8 +1,8 @@
 package com.okas.packModelo;
 
-abstract class TableroBuilder {
+public abstract class TableroBuilder {
 
-	Tablero tablero;
+	protected Tablero tablero;
 
     public Tablero getTablero() {
         return tablero;
@@ -11,7 +11,7 @@ abstract class TableroBuilder {
     /**
      * Genera el tablero
      */
-    protected abstract void generarTablero();
+    public abstract void generarTablero();
 
     /**
      * Construye el tablero metiendo las casillas pertinentes
@@ -28,13 +28,13 @@ abstract class TableroBuilder {
 	/**
      * Coloca las casillas bomba
      */
-	protected abstract void ponerCasillasBomba();
+	public abstract void ponerCasillasBomba();
 	
 	
 	/**
      * Coloca las casillas que restan del tablero
      */
-    private void ponerCasillasRestantes() {
+	public void ponerCasillasRestantes() {
 		tablero.rellenarCasillasRestantes();
 
 	}
