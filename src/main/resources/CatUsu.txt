@@ -4,7 +4,7 @@ Criswas Manzanas ### 3254 ### 3
 HarryPotter ### 41 ### 1
 DorkaitzRivera ### 47 ### 1
 Charizard ### 40 ### 1
-puta ### 71 ### 1
+Olatz ### 71 ### 1
 kokoo ### 29 ### 1
 MadreTierra ### 19 ### 1
 OjoDePura ### 30 ### 1
@@ -18,3 +18,4 @@ Javier ### 54 ### 3
 hola ### 99 ### 2
 Rodrigo ### 999 ### 1
 Anius ### 41 ### 1
+Ser ### 5 ### 1

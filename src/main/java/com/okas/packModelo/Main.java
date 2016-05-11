@@ -1,9 +1,8 @@
 package com.okas.packModelo;
 
-import com.okas.packVista.VentanaBuscaminas;
 import com.okas.packVista.VentanaLogin;
 
-public class Main {
+class Main {
 
 	public static void main(String[] args) {
 

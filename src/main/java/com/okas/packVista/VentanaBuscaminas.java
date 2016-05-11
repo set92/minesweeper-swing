@@ -10,7 +10,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class VentanaBuscaminas implements Observer {
-	public static JFrame jf;
+	private static JFrame jf;
 	private JPanel matrizCampoJuego;
 	private JPanel panelBotonesSup;
 	private Boton[][] matrizBotones;
@@ -19,14 +19,14 @@ public class VentanaBuscaminas implements Observer {
 	private JLabel lblTiempo;
 
 	private static VentanaBuscaminas ventana;
-	private Buscaminas b = Buscaminas.getBuscaminas();//Lo pongo aqui para solo ponerlo 1 vez (variable local)
+	private final Buscaminas b = Buscaminas.getBuscaminas();//Lo pongo aqui para solo ponerlo 1 vez (variable local)
 
-	public static VentanaBuscaminas getVentana() {
+	static VentanaBuscaminas getVentana() {
 		if (ventana == null) ventana = new VentanaBuscaminas();
 		return ventana;
 	}
 
-	public JFrame getJf() {
+	JFrame getJf() {
 		return jf;
 	}
 
@@ -42,6 +42,8 @@ public class VentanaBuscaminas implements Observer {
 			jf.setBounds(100, 100, 650, 450);
 		else if (b.getAlto() == 12)
 			jf.setBounds(100, 100, 1050, 600);
+
+		jf.setResizable(false);
 
 		JPanel contentPane = new JPanel();
 		jf.setContentPane(contentPane);
@@ -74,9 +76,9 @@ public class VentanaBuscaminas implements Observer {
 							.addGap(6)
 							.addComponent(getBtnReiniciar(), GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
 							.addGap(10)
-							.addComponent(getLblTiempo(), GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
+							.addComponent(getLblTiempo(), GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-							.addGap(130)));
+							.addGap(100)));
 			gl_botonesSup.setVerticalGroup(
 					gl_botonesSup.createParallelGroup(GroupLayout.Alignment.TRAILING)
 					.addGroup(gl_botonesSup.createSequentialGroup()
@@ -128,10 +130,10 @@ public class VentanaBuscaminas implements Observer {
 			matrizCampoJuego = new JPanel();
 
 			switch (b.getAlto()){
-			case 7: matrizCampoJuego.setLayout(new GridLayout(7, 10, 0, 0));break;
-			case 10: matrizCampoJuego.setLayout(new GridLayout(10, 15, 0, 0));break;
-			case 12: matrizCampoJuego.setLayout(new GridLayout(12, 25, 0, 0));break;
-			}
+                case 7: matrizCampoJuego.setLayout(new GridLayout(7, 10, 0, 0));break;
+                case 10: matrizCampoJuego.setLayout(new GridLayout(10, 15, 0, 0));break;
+                case 12: matrizCampoJuego.setLayout(new GridLayout(12, 25, 0, 0));break;
+            }
 
 			matrizCampoJuego.setBackground(Color.WHITE);
 			crearMatrizBotones();
@@ -148,7 +150,7 @@ public class VentanaBuscaminas implements Observer {
 			for (int i = 0; i < b.getAlto(); i++){
 				for (int j = 0; j < b.getAncho(); j++){
 					Boton boton = new Boton(i,j);
-					boton.anadirFuncion(this);
+					boton.anadirFuncion();
 					matrizBotones[i][j] = boton;
 					boton.setFocusable(false);
 				}
@@ -172,49 +174,29 @@ public class VentanaBuscaminas implements Observer {
 	}
 
 	private void mostrarMinas() {
-		for (int i = 0; i < b.getAlto(); i++){
-			for (int j = 0; j < b.getAncho(); j++){
+		for (int i = 0; i < b.getAlto(); i++)
+			for (int j = 0; j < b.getAncho(); j++)
 				if (b.getCampoJuego()[i][j] instanceof CasillaMina) {
 					ImageIcon bomba = new ImageIcon("src/main/resources/ImagenBomba.png");
 					devolverCasilla(i, j).setIcon(bomba);
 					devolverCasilla(i, j).setEnabled(false);
 				}
-			}
-		}
 	}
 
-	//    TODO REHACER METODO, TIENE QUE ESTAR EN EL MODELO, NO LA VISTA
-	//    private boolean finJuego() {
-	//        boolean terminado = false;
-	//        int cont = 0;
-	//        for (int i = 0; i < b.getAlto(); i++) {
-	//            for (int j = 0; j < b.getAncho(); j++) {
-	//                cas = b.getTablero().getCampoJuego();
-	//                if (!cas[i][j].isDescubierta()) cont++;
-	//            }
-	//        }
-	//        if (cont == Buscaminas.getBuscaminas().getTablero().getNumMinas()) terminado = true;
-	//        return terminado;
-	//    }
-	//    private void salirJuego() {
-	//        jf.setVisible(false);
-	//        JOptionPane.showMessageDialog(null, "HAS GANADO");
-	//        //MANDAR A RANKING
-	//    }
-
-	public void controlMouse(MouseEvent e, int pFila, int pCol) {
+	void controlMouse(MouseEvent e, int pFila, int pCol) {
 		if (SwingUtilities.isLeftMouseButton(e)) {
 			b.descubrirCasilla(pFila,pCol);
-			if(!b.estaFinalizado())
-			{
+			if(!b.estaFinalizado())	{
 				if (b.juegoGanado()){
 					jf.setVisible(false);       
 					JOptionPane.showMessageDialog(null, "¡HAS GANADO!");
-					jf.setVisible(false);
+
+                    Buscaminas.getBuscaminas().cancelarMinas();
+                    ventana = null;
+
 					VentanaRanking.getVentana().setVisible(true);
 				}
 			}
-			//if (finJuego()) salirJuego();
 		} else if (SwingUtilities.isRightMouseButton(e)) {
 			if (b.isDescubierta(pFila,pCol)){}
 			else if (!b.isMarcadaBandera(pFila, pCol)) {
@@ -223,6 +205,7 @@ public class VentanaBuscaminas implements Observer {
 					b.setContador(-1);
 					b.marcarBandera(pFila, pCol);
 				}
+
 			} else if (b.isMarcadaBandera(pFila, pCol)){
 				b.setContador(1);
 				b.desmarcarBandera(pFila,pCol);
@@ -244,36 +227,44 @@ public class VentanaBuscaminas implements Observer {
 			int x = Integer.parseInt(alto);
 			int y = Integer.parseInt(ancho);
 
-			if (accion.equals("marcarBandera")){
-				ImageIcon bandera = new ImageIcon("src/main/resources/ImagenBandera.png");
-				devolverCasilla(x, y).setIcon(bandera);
-				lblNumMinas.setText("Minas: "+b.getContador());
-			} else if (accion.equals("desmarcarBandera")){
-				devolverCasilla(x, y).setIcon(null);
-				lblNumMinas.setText("Minas: "+b.getContador());
-			} else if (accion.equals("descubrirCasilla")){
-				if(o instanceof CasillaValor){
-					devolverCasilla(x, y).setText(""+((CasillaValor)o).getValor());
-					devolverCasilla(x, y).setEnabled(false);
-					devolverCasilla(x, y).setBackground(Color.WHITE);
-					devolverCasilla(x, y).setForeground(Color.BLACK);
-				} else if(o instanceof CasillaMina){
-					ImageIcon icono2 = new ImageIcon("src/main/resources/tobal.png");
-					btnReiniciar.setIcon(icono2);
-					mostrarMinas();
-					bloquearBotones();
-					JOptionPane.showMessageDialog(null, "GAME OVER");
-					int puntos = ContadorTiempo.getGestor().getTiempoEnSegundos();
-					Buscaminas.getBuscaminas().getUser().setPtosUsuario(puntos);
-					jf.setVisible(false);
-					VentanaRanking.getVentana().setVisible(true);
-				} else if(o instanceof CasillaValorCero){
-					devolverCasilla(x, y).setEnabled(false);
-					devolverCasilla(x, y).setBackground(Color.WHITE);
-					devolverCasilla(x, y).setForeground(Color.BLACK);
-					devolverCasilla(x, y).setText(" ");
-				}
-			}
+            switch (accion) {
+                case "marcarBandera":
+                    ImageIcon bandera = new ImageIcon("src/main/resources/ImagenBandera.png");
+                    devolverCasilla(x, y).setIcon(bandera);
+                    lblNumMinas.setText("Minas: " + b.getContador());
+                    break;
+                case "desmarcarBandera":
+                    devolverCasilla(x, y).setIcon(null);
+                    lblNumMinas.setText("Minas: " + b.getContador());
+                    break;
+                case "descubrirCasilla":
+                    if (o instanceof CasillaValor) {
+                        devolverCasilla(x, y).setText("" + ((CasillaValor) o).getValor());
+                        devolverCasilla(x, y).setEnabled(false);
+                        devolverCasilla(x, y).setBackground(Color.WHITE);
+                        devolverCasilla(x, y).setForeground(Color.BLACK);
+                    } else if (o instanceof CasillaMina) {
+                        ImageIcon icono2 = new ImageIcon("src/main/resources/tobal.png");
+                        btnReiniciar.setIcon(icono2);
+                        mostrarMinas();
+                        bloquearBotones();
+                        JOptionPane.showMessageDialog(null, "GAME OVER");
+
+                        this.getJf().setVisible(false);
+                        Buscaminas.getBuscaminas().cancelarMinas();
+                        ventana = null;
+
+                        int puntos = ContadorTiempo.getGestor().getTiempoEnSegundos();
+                        Buscaminas.getBuscaminas().getUser().setPtosUsuario(puntos);
+                        VentanaRanking.getVentana().setVisible(true);
+                    } else if (o instanceof CasillaValorCero) {
+                        devolverCasilla(x, y).setEnabled(false);
+                        devolverCasilla(x, y).setBackground(Color.WHITE);
+                        devolverCasilla(x, y).setForeground(Color.BLACK);
+                        devolverCasilla(x, y).setText(" ");
+                    }
+                    break;
+            }
 		}
 
 	}

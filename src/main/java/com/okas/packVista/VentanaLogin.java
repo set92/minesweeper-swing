@@ -1,7 +1,6 @@
 package com.okas.packVista;
 
 import com.okas.packModelo.Buscaminas;
-import com.okas.packModelo.Sesion;
 import com.okas.packModelo.Usuario;
 
 import javax.swing.*;
@@ -26,16 +25,15 @@ public class VentanaLogin extends JFrame {
 	private JButton btnStartGame;
 	private Controlador controlador;
 	private static VentanaLogin ventana;
-	protected int nivel;
 	
 	public static VentanaLogin getVentana(){
 		if(ventana == null){
             try {
-              //  UIManager.setLookAndFeel("com.jtattoo.plaf.luna.LunaLookAndFeel");
+                UIManager.setLookAndFeel("com.jtattoo.plaf.luna.LunaLookAndFeel");
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            ventana=new VentanaLogin();
+            ventana = new VentanaLogin();
 		}
 		return ventana;
 	}
@@ -46,6 +44,7 @@ public class VentanaLogin extends JFrame {
 	}
 	private void initialize() {
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		setResizable(false);
 		addWindowListener(getControlador());
 		setBounds(100, 100, 450, 300);
 		JPanel contentPane = new JPanel();
@@ -105,7 +104,7 @@ public class VentanaLogin extends JFrame {
 	}
 	private JComboBox<String> getComboBox() {
 		if (comboBox == null) {
-			Vector<String> vec = new Vector<String>();
+			Vector<String> vec = new Vector<>();
 			for(int i = 1; i < 4; i++ ) vec.addElement(Integer.toString(i));
 			comboBox = new JComboBox<>(vec);
 		}
@@ -173,8 +172,8 @@ public class VentanaLogin extends JFrame {
 			if(e.getActionCommand().equals("startGame")){
 				jugar();
             } else if (e.getActionCommand().equals("displayRanking")){
-            	Buscaminas.getBuscaminas().setNivel(Integer.parseInt(getComboBox().getSelectedItem().toString()));
-                VentanaRanking.getVentana().setVisible(true);                
+                Buscaminas.getBuscaminas().setNivel(Integer.parseInt(getComboBox().getSelectedItem().toString()));
+                VentanaRanking.getVentana().setVisible(true);
 			}
 		}
 	}
@@ -184,12 +183,11 @@ public class VentanaLogin extends JFrame {
         Usuario user;
         if (getTextField().getText().equals("")) user = new Usuario("Anon", 0);
         else user = new Usuario(getTextField().getText(), 0);
-        Sesion.getSesion().setUsuario(user);
         Buscaminas.getBuscaminas().setUsuario(user);
+		Buscaminas.getBuscaminas().setNivel(Integer.parseInt(getComboBox().getSelectedItem().toString()));
 
         Buscaminas.getBuscaminas().crearJuego(Integer.parseInt(getComboBox().getSelectedItem().toString()));
         VentanaBuscaminas.getVentana().getJf().setVisible(true);
-        Buscaminas.getBuscaminas().setNivel(Integer.parseInt(getComboBox().getSelectedItem().toString()));
-        Sesion.getSesion().setNivel(Integer.parseInt(getComboBox().getSelectedItem().toString()));
+
     }
 }

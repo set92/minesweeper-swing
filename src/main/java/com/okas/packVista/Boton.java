@@ -1,33 +1,44 @@
 package com.okas.packVista;
 
 import javax.swing.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 
-public class Boton extends JButton { //Esta clase sirve para tener un JButton con coordenadas
+/**
+ * Clase para tener JButton con Coordenadas y funcionalidad
+ */
+class Boton extends JButton {
 	
-	private int posAlto;
-	private int posAncho;
+	private final int posAlto;
+	private final int posAncho;
+    private Controlador controlador;
 
-	public Boton(int pPosx, int pPosy){
+	Boton(int pPosx, int pPosy){
 		posAlto = pPosx;
 		posAncho = pPosy;
 	}
 
 	/**
-     * Anade una funcion al botón
-     * @param vB 
+     * Anade la funcionalidad al botón
      */
-	public void anadirFuncion(VentanaBuscaminas vB){
-		this.addMouseListener(new MouseListener() {
-			public void mouseReleased(MouseEvent e) {}
-			public void mousePressed(MouseEvent e) {}
-			public void mouseExited(MouseEvent e) {}
-			public void mouseEntered(MouseEvent e) {}
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				vB.controlMouse(e ,posAlto,posAncho);
-			}
-		});
+	void anadirFuncion(){
+		this.addMouseListener(getControlador());
 	}
+
+    private Controlador getControlador(){
+        if (controlador == null) controlador = new Controlador();
+        return controlador;
+    }
+
+    private class Controlador implements MouseListener {
+        @Override
+        public void mouseClicked(MouseEvent e) { VentanaBuscaminas.getVentana().controlMouse(e ,posAlto,posAncho); }
+        @Override
+        public void mousePressed(MouseEvent e) { }
+        @Override
+        public void mouseReleased(MouseEvent e) { }
+        @Override
+        public void mouseEntered(MouseEvent e) { }
+        @Override
+        public void mouseExited(MouseEvent e) { }
+    }
 }

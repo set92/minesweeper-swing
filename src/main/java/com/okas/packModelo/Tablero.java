@@ -4,10 +4,10 @@ import java.util.Random;
 
 public class Tablero {
 
-	private int alto;
-	private int ancho;
+	private final int alto;
+	private final int ancho;
 	private int numMinas;
-	private Casilla[][] campoJuego;
+	private final Casilla[][] campoJuego;
 	private static boolean minasPuestas = false;//Flag para ver si estan puestas las minas
 
 	/**
@@ -60,9 +60,9 @@ public class Tablero {
 	}
 
 	/**
-	 * Colocamos la casilla que nos trae como parámetro en le coordenada que nos trae como parámetro
-	 * @param pCoor Coordenada donde queremos meter la casilla
-	 * @pCasilla Casilla que queremos colocar
+	 * Colocamos la casilla que nos trae como parámetro en la coordenada que nos trae como parámetro
+	 * @param pCoord Coordenada donde queremos meter la casilla
+	 * @param pCasilla Casilla que queremos colocar
 	 */
 	public void colocarCasilla(Coordenada pCoord, Casilla pCasilla) {
 		if (this.coordenadaValida(pCoord))
@@ -76,7 +76,7 @@ public class Tablero {
 	 * Saber si la coordenada que nos pasa como parámetros es válida o no
 	 * @param pCoord Coordenada que queremos comprobar
 	 */
-	public boolean coordenadaValida(Coordenada pCoord){
+    private boolean coordenadaValida(Coordenada pCoord){
 		boolean valid = false;
 		if (pCoord.getAlto() >= 0 && pCoord.getAncho() >= 0){
 			if (pCoord.getAlto() <= this.alto && pCoord.getAncho() <= this.ancho){
@@ -87,8 +87,9 @@ public class Tablero {
 	}	
 
 	/**
-	 * Descubrir la casilla que nos trae como parámetro
-	 * @param cas Casilla que queremos descubrir
+	 * Descubrir la casilla
+	 * @param pFila posicion en Y de la casilla que queremos descubrir
+     * @param pColumna posicion en X de la casilla que queremos descubrir
 	 */
 	public void descubrirCasilla(int pFila, int pColumna) {
 		if (this.esValida(pFila, pColumna))
@@ -97,9 +98,10 @@ public class Tablero {
 
 	/**
 	 * Saber si la casilla que nos trae como parámetro es válida o no
-	 * @param cas Casilla que queremos comprobar
+     * @param pFila posicion en Y de la casilla que se modifica
+     * @param pColumna posicion en X de la casilla que se modifica
 	 */
-	public boolean esValida (int pFila,int pColumna){
+    private boolean esValida(int pFila, int pColumna){
 		boolean valida = false;
 		if (pFila >= 0 && pColumna >= 0){
 			if (pFila <= this.alto && pColumna <= this.ancho){
@@ -111,7 +113,8 @@ public class Tablero {
 
 	/**
 	 * Poner bandera en la casilla que nos trae como parámetros
-	 * @param cas Casilla que queremos modificar
+     * @param pFila posicion en Y de la casilla que se modifica
+     * @param pColumna posicion en X de la casilla que se modifica
 	 */
 	public void marcarBandera(int pFila, int pColumna){
 		if (this.esValida(pFila,pColumna))
@@ -120,7 +123,8 @@ public class Tablero {
 
 	/**
 	 * Quitar bandera en la casilla que nos trae como parámetros
-	 * @param cas Casilla que queremos modificar
+     * @param pFila posicion en Y de la casilla que se modifica
+     * @param pColumna posicion en X de la casilla que se modifica
 	 */
 	public void desmarcarBandera(int pFila, int pColumna){
 		if (this.esValida(pFila,pColumna))
