@@ -17,26 +17,6 @@ public class Tablero {
 		minasPuestas = false;
 	}
 
-	/*public boolean juegoGanado()
-	{
-		boolean ganado = false;
-		int contador = 0;
-		System.out.println("0");
-		for(int i  = 0;i<alto;i++){
-			for(int j = 0; i<ancho; j++){
-				System.out.println("1");
-				if(!campoJuego[i][j].isDescubierta()){
-					contador++;
-				}
-			}
-		}
-		System.out.println(ganado);
-		if(contador == 10){
-			ganado = true;
-		}
-		return ganado;
-	}*/
-
 	public Tablero(int pAlto, int pAncho) {
 		alto = pAlto;
 		ancho = pAncho;
@@ -65,26 +45,12 @@ public class Tablero {
 	 * @param pCasilla Casilla que queremos colocar
 	 */
 	public void colocarCasilla(Coordenada pCoord, Casilla pCasilla) {
-		if (this.coordenadaValida(pCoord))
-		{
+		if (this.esValida(pCoord.getAlto(), pCoord.getAncho())) {
 			int i = pCoord.getAlto();
 			int j = pCoord.getAncho();
 			campoJuego[i][j] = pCasilla;
 		}
 	}
-	/**
-	 * Saber si la coordenada que nos pasa como parámetros es válida o no
-	 * @param pCoord Coordenada que queremos comprobar
-	 */
-    private boolean coordenadaValida(Coordenada pCoord){
-		boolean valid = false;
-		if (pCoord.getAlto() >= 0 && pCoord.getAncho() >= 0){
-			if (pCoord.getAlto() <= this.alto && pCoord.getAncho() <= this.ancho){
-				valid = true;
-			}
-		}
-		return valid;
-	}	
 
 	/**
 	 * Descubrir la casilla
@@ -102,13 +68,8 @@ public class Tablero {
      * @param pColumna posicion en X de la casilla que se modifica
 	 */
     private boolean esValida(int pFila, int pColumna){
-		boolean valida = false;
-		if (pFila >= 0 && pColumna >= 0){
-			if (pFila <= this.alto && pColumna <= this.ancho){
-				valida = true;
-			}
-		}
-		return valida;
+		return (pColumna >= 0 && pColumna < ancho && pFila >= 0 &&  pFila < alto);
+
 	}
 
 	/**
@@ -158,7 +119,7 @@ public class Tablero {
 		int aancho = casilla.getCoordenada().getAncho();
 		for (int i = aalto - 1; i <= aalto + 1; i++) {
 			for (int j = aancho - 1; j <= aancho + 1; j++) {
-				if (j >= 0 && j < ancho && i >= 0 && i < alto) {
+				if (esValida(i,j)) {
 					if (!campoJuego[aalto][aancho].equals(campoJuego[i][j]))
 						lista.getListCasilla().add(campoJuego[i][j]);
 				}
@@ -173,7 +134,7 @@ public class Tablero {
 	public void rellenarCasillasRestantes() {
 		for (int i = 0; i < alto; i++) {
 			for (int j = 0; j < ancho; j++) {
-				if (j >= 0 && j < ancho && i >= 0 && i < alto) {
+				if (esValida(i,j)) {
 					if (campoJuego[i][j] == null) {
 						Coordenada coordenadaActual = new Coordenada(i, j);
 						Casilla casillaActual = CasillaFactory.getCasillaFactory().createCasilla("Cero",
