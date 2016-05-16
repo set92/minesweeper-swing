@@ -4,7 +4,9 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
+/**
+ * Clase encargada de guardar el registro de todos los usuarios que han jugado
+ */
 public class CatalogoUsuarios {
 
 	private static CatalogoUsuarios miCatalogoUsuarios = null;
@@ -19,6 +21,9 @@ public class CatalogoUsuarios {
 		return miCatalogoUsuarios;
 	}
 	
+	/**
+	 * Cargar los usuarios desde un fichero
+	 */
 	public void cargarUsuarios() {
 		BufferedReader fichero = null;
 		try {
@@ -43,6 +48,11 @@ public class CatalogoUsuarios {
 		sc.close();
 	}		
 
+	/**
+	 * Añadir un nuevo usuario al ranking
+	 * @param user nombre y puntos del usuario
+	 * @param level nivel del usuario
+	 */
 	void addUser(ArrayList<String> user, int level){
 		String nivel =  String.valueOf(level);
 		this.lista.addUsuario(user, nivel);
@@ -63,6 +73,12 @@ public class CatalogoUsuarios {
 			}	
 		}
 	}
+	
+	/**
+	 * Mostrar la lista del ranking de un nivel seleccionado
+	 * @param pNivel Nivel del que queremos conocer el ranking
+	 * @return Lista del rankig seleccionado
+	 */
 	public String mostrarLista(int pNivel){
 		return lista.getRanking(String.valueOf(pNivel));
 	}

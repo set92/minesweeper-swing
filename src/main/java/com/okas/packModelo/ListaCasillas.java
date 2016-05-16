@@ -2,6 +2,9 @@ package com.okas.packModelo;
 
 import java.util.ArrayList;
 
+/**
+ * Clase que guarda la referencia a las casillas que están alrededor de una casilla determinada
+ */
 public class ListaCasillas extends ArrayList<Casilla>{
     private final ArrayList<Casilla> listaCasilla;
     

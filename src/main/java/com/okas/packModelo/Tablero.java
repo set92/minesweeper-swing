@@ -2,6 +2,9 @@ package com.okas.packModelo;
 
 import java.util.Random;
 
+/**
+ * Clase encargada de gestionar todas las acciones del tablero del buscaminas
+ */
 public class Tablero {
 
 	private final int alto;
@@ -186,7 +189,7 @@ public class Tablero {
 		int anchoMina = coordenadaAct.getAncho();
 		for (int i = altoMina - 1; i <= altoMina + 1; i++) {
 			for (int j = anchoMina - 1; j <= anchoMina + 1; j++) {
-				if ((j >= 0) && (j < ancho) && (i >= 0) && (i < alto)) {
+				if (esValida(i,j)) {
 					Casilla casillaActual = campoJuego[i][j];
 					if (casillaActual != null) {
 						if (casillaActual instanceof CasillaValor) {

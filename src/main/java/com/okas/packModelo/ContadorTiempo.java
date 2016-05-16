@@ -33,6 +33,9 @@ public class ContadorTiempo extends Observable{
         this.running = running;
     }
 
+    /**
+     * Actualiza el tiempo del contador
+     */
     private void updateSeconds(){
         if(running){
             timeSeconds++;
@@ -49,6 +52,10 @@ public class ContadorTiempo extends Observable{
         return timeSeconds + timeMinutes*60;
     }
 
+    /**
+     * Mostrar en label el string correspondiente al tiempo
+     * @return String correspondiente al tiempo
+     */
     public String mostrarEnLabel(){
         String tm = Integer.toString(timeMinutes);
         String ts = Integer.toString(timeSeconds);
@@ -59,6 +66,9 @@ public class ContadorTiempo extends Observable{
         return tm +":"+ ts;
     }
 
+    /**
+     * Resetear el contador del tiempo
+     */
     public void reset(){
         timeMinutes = 0;
         timeSeconds = 0;

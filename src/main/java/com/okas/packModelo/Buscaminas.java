@@ -30,28 +30,42 @@ public class Buscaminas {
 	public void setContador(int n){ contador = contador + n; }
 	public void setUsuario(Usuario pUsuario){ user = pUsuario; }
 	private void setTableroBuilder(TableroBuilder tabBuilder){ tableroBuilder = tabBuilder; }
-    private int setPuntuacion(){
+    
+	private int setPuntuacion(){
         return ContadorTiempo.getGestor().getTiempoEnSegundos();
     }
-    public void setTablero(Tablero tb){this.tablero=tb;} //para jUnits
+   
+	public void setTablero(Tablero tb){this.tablero=tb;} //para jUnits
 
 	public static Buscaminas getBuscaminas(){
 		if (miBuscaminas == null) miBuscaminas = new Buscaminas();
 		return miBuscaminas;
 	}
 
-    public boolean estaFinalizado(){
-        return finJuego;
-    }
+    public boolean estaFinalizado(){ return finJuego; }
+    
+    /**
+     * Marca bandera en la casilla seleccionada 
+     * @param pFila Coordenada correspondiente a la fila de la casilla
+     * @param pColumna Coordenada correspondiente a la columna de la casilla
+     */
     public void marcarBandera(int pFila, int pColumna){
         tablero.marcarBandera(pFila, pColumna);
     }
+    
+    /**
+     * Quita la bandera en la casilla seleccionada
+     * @param pFila Coordenada correspondiente a la fila de la casilla
+     * @param pColumna Coordenada correspondiente a la columna de la casilla
+     */
     public void desmarcarBandera(int pFila, int pColumna){
         tablero.desmarcarBandera(pFila, pColumna);
     }
+    
     public boolean isMarcadaBandera(int pFila, int pColumna){
         return tablero.isMarcadaBandera(pFila,pColumna);
     }
+    
     public boolean isDescubierta(int pFila, int pColumna){
         return tablero.isDescubierta(pFila,pColumna);
     }
@@ -64,9 +78,13 @@ public class Buscaminas {
 		crearJuego(getNivel());
 	}
 
+	/**
+	 * Modifica el chivato que dice si las minas están puestas o no
+	 */
     public void cancelarMinas(){
         tablero.cancelarMinas();
     }
+    
 	/**
 	 * Genera un nivel dependiendo del parametro
      * @param nivel Nivel que se quiere generar
@@ -103,6 +121,10 @@ public class Buscaminas {
 		if(tablero.getCampoJuego()[pFila][pColumna] instanceof CasillaMina) finJuego = true;
 	}
 
+	/**
+	 * Muestra si se ha ganado o no el juego
+	 * @return True si el juego ha sido ganado, False si no
+	 */
 	public boolean juegoGanado(){
 		int cont = 0;
 		for (int i = 0; i < tablero.getAlto(); i++)

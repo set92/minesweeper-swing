@@ -119,11 +119,7 @@ buildNumber.properties
 .mvn/timing.properties
 
 # Visual Paradigm
-Buscaminas.vpp~1
-Buscaminas.vpp~2
-Buscaminas.vpp~3
 Buscaminas.vux
-Buscaminas.vpp~20
-Buscaminas.vpp~21
+Buscaminas.vpp~*
 Buscaminas.vpp.working
 

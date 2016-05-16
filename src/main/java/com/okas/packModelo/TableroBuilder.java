@@ -1,5 +1,8 @@
 package com.okas.packModelo;
 
+/**
+ * Clase encargada de construir el tablero
+ */
 abstract class TableroBuilder {
 
 	Tablero tablero;

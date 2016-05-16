@@ -1,5 +1,8 @@
 package com.okas.packModelo;
 
+/**
+ * Clase encargada de ejecutar las acciones de una casilla tipo CasillaMina
+ */
 public class CasillaMina extends Casilla {
     
 	public CasillaMina(Coordenada pPos){

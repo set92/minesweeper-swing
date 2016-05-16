@@ -1,7 +1,10 @@
 package com.okas.packModelo;
 
+/**
+ * Clase que se encarga de crear los tableros de nivel 2
+ *
+ */
 public class BuilderN2 extends TableroBuilder {
-
 	
 	/**
      * Genera el tablero del segundo nivel

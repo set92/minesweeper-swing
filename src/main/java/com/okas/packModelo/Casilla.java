@@ -2,6 +2,9 @@ package com.okas.packModelo;
 
 import java.util.Observable;
 
+/**
+ * Clase encargada de ejecutar las acciones de las casillas
+ */
 public abstract class Casilla extends Observable {
     final Coordenada pos;
     boolean marcadaBandera;
@@ -16,7 +19,6 @@ public abstract class Casilla extends Observable {
     /**
      * Descubre la casilla
      */
-
     public void descubrirCasilla(){
     	if (!descubierta && !marcadaBandera){
     		marcarDescubierta();

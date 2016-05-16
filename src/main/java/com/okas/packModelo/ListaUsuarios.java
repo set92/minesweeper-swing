@@ -2,6 +2,9 @@ package com.okas.packModelo;
 
 import java.util.*;
 
+/**
+ * Clase que guarda la lista de los mejores usuarios que han jugado al buscaminas (top10)
+ */
 class ListaUsuarios {
 
 	private final HashMap<ArrayList<String>, String> lista;
@@ -9,10 +12,20 @@ class ListaUsuarios {
 	ListaUsuarios(){
 		lista = new HashMap<>();
 	}
+	/**
+	 * Añade un usuario a la lista 
+	 * @param user nombre y puntos del usuario
+	 * @param nivel Nivel que ha seleccionado el usuario para jugar
+	 */
 	void addUsuario(ArrayList<String> user, String nivel){
 		lista.put(user, nivel);
 	}
 
+	/**
+	 * Obtener el ranking 
+	 * @param nivel Nivel del ranking que se quiere conocer
+	 * @return String del top 10 del nivel seleccionado
+	 */
 	String getRanking(String nivel){
 		String ranking = "Jugadores: \n";
 		HashMap<String, Integer> aux = new HashMap<>();

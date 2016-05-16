@@ -1,5 +1,8 @@
 package com.okas.packModelo;
 
+/**
+ * Clase encargada de ejecutar las acciones de una casilla tipo CasillaValorCero
+ */
 public class CasillaValorCero extends Casilla {
 
 	private ListaCasillas lista;

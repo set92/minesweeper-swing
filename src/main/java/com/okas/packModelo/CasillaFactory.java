@@ -1,5 +1,8 @@
 package com.okas.packModelo;
 
+/**
+ * Clase encargada de crear las casillas
+ */
 public class CasillaFactory {
 	
 	private static CasillaFactory miCasillaFactory;

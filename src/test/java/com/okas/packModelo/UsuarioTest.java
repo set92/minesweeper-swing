@@ -1,8 +1,8 @@
 package com.okas.packModelo;
 
-import org.junit.Test;
+import static org.junit.Assert.*;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
 public class UsuarioTest {
 	
@@ -15,6 +15,10 @@ public class UsuarioTest {
 		assertEquals("jorge", us.getNombreUsuario());
 		assertEquals(1000, us2.getPtosUsuario());
 		assertEquals("sergio", us2.getNombreUsuario());
+		
+		us.setPtosUsuario(50);
+		assertEquals(us.getPtosUsuario(),20);
+		assertFalse(us.getPtosUsuario()==50);
 	}
 
 }

@@ -1,7 +1,10 @@
 package com.okas.packModelo;
 
-
+/**
+ * Clase encargada de gestionar el estado del usuario
+ */
 public class Usuario {
+	
     private final String nombreUsuario;
     private int ptosUsuario;
 

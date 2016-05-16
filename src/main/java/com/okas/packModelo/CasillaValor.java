@@ -1,8 +1,11 @@
 package com.okas.packModelo;
 
+/**
+ * Clase encargada de ejecutar las acciones de una casilla tipo CasillaValor
+ */
 public class CasillaValor extends Casilla {
+	
     private int valor;
-
 
     public CasillaValor(Coordenada pPos) {
     	super(pPos);
