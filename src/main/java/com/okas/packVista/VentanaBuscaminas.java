@@ -55,6 +55,7 @@ public class VentanaBuscaminas implements Observer {
 		ContadorTiempo.getGestor().reset();
 		ContadorTiempo.getGestor().setRunning(true);
 
+		b.inicializarFinJuego();
 		b.anadirObservadores(this);
 
 		contentPane.add(getBotonesSup(), BorderLayout.NORTH);

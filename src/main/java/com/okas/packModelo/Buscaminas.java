@@ -66,6 +66,8 @@ public class Buscaminas {
         return tablero.isMarcadaBandera(pFila,pColumna);
     }
     
+    public void inicializarFinJuego(){ finJuego = false; }
+    
     public boolean isDescubierta(int pFila, int pColumna){
         return tablero.isDescubierta(pFila,pColumna);
     }
@@ -76,12 +78,14 @@ public class Buscaminas {
 	public void reiniciar() {
 		cancelarMinas();
 		crearJuego(getNivel());
+		//finJuego = false;
 	}
 
 	/**
 	 * Modifica el chivato que dice si las minas están puestas o no
 	 */
     public void cancelarMinas(){
+    	finJuego = false;
         tablero.cancelarMinas();
     }
     
